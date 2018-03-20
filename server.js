@@ -55,7 +55,7 @@ const onListening = () => {
 };
 
 if (debug.enabled) {
-   console.log('DEBUG');
+    console.log('DEBUG');
 }
 
 app.set('port', port);
@@ -65,5 +65,3 @@ const server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-
-
