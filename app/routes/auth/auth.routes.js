@@ -10,6 +10,14 @@ const init = (app, data) => {
         })
         .get('/login', async (req, res) => {
             res.render('auth/login');
+        })
+        .post('/register', async (req, res) => {
+            // TODO
+            res.redirect('/auth/login');
+        })
+        .post('/login', async (req, res) => {
+            // TODO
+            res.redirect('/auth/register');
         });
 
     app.use('/auth', router);
