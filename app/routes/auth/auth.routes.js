@@ -6,13 +6,13 @@ const init = (app, data) => {
     const router = new Router();
     router
         .get('/register', async (req, res) => {
-            res.render('/auth/register');
+            res.render('auth/register');
         })
         .get('/login', async (req, res) => {
-            res.render('/auth/login');
+            res.render('auth/login');
         });
 
-    app.use('/superheroes', router);
+    app.use('/auth', router);
 };
 
 module.exports = {
