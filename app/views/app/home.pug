@@ -1,0 +1,18 @@
+extends ../shared/master
+
+block content
+    div.row
+        div.col.s8.offset-s2
+            h4.center-align
+                | Find your favorite game
+    div.row
+        form.col.s6.offset-s3
+            .row
+            .input-field
+                i.material-icons.prefix search
+                input#icon_prefix.validate(type='text')
+                label(for='icon_prefix')
+                    | Search Here
+
+
+
