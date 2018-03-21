@@ -9,7 +9,7 @@ const fetchAllGames = async (requestsCount, limit, offset, allGames) => {
         return null;
     }
 
-    const url = `https://api-endpoint.igdb.com/games/?fields=*&expand=collection,franchise,developers,publishers,game_engines,genres&limit=50&offset=${offset}`;
+    const url = `https://api-endpoint.igdb.com/games/?fields=*&expand=collection,franchise,developers,publishers,game_engines,game_modes,genres&limit=50&offset=${offset}`;
 
     const games = await axios.get(url, {
         headers: {
