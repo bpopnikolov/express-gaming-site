@@ -1,16 +1,31 @@
 const axios = require('axios');
+const igdb = require('igdb-api-node').default;
 
 const config = require('../../config/igdb.config');
+const client = igdb(config.apiKey);
 
-const fetchGames = async (genreGameIds) => {
-    const games = await axios.get('https://api-endpoint.igdb.com/genres/?fields=*', {
+const fetchAllGames = async (requestsCount, limit, offset, allGames) => {
+    if (requestsCount === limit) {
+        return null;
+    }
+
+    const url = `https://api-endpoint.igdb.com/games/?fields=*&expand=collection,franchise,developers,publishers,game_engines,game_modes,genres&limit=50&offset=${offset}`;
+
+    const games = await axios.get(url, {
         headers: {
             'user-key': config.apiKey,
             'Accept': 'application/json',
         },
     });
+    allGames.push(games.data);
+    requestsCount++;
+    offset = 50;
 
-    console.log(games.data);
+    await fetchAllGames(requestsCount, limit, offset, allGames);
+
+    return allGames;
 };
 
-fetchGames();
+module.exports = {
+    fetchAllGames,
+};
