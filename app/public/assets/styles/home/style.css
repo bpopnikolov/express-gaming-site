@@ -1,0 +1,47 @@
+.game-search {
+    margin-top: 40px;
+}
+
+.gs-field {
+    display: inline-block;
+    width: calc(100% - (50px));
+}
+
+.gs-button {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+}
+
+.gs-button-icon {
+    vertical-align: middle;
+}
+
+.wr-slider {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.slick-prev:before {
+    color: #919191;
+}
+
+.slick-next:before {
+    color: #919191;
+}
+
+.slider-games {
+    background-color: #fff;
+    margin: 0 auto;
+}
+
+.game-box {
+    text-align: center;
+}
+
+.game-pic{
+    width: 180px;
+    height: 250px;
+    margin: 0 auto;
+}
