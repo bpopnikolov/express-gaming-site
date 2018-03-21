@@ -1,52 +1,30 @@
-div.row
-    form.col.s12
-        div.row
-            div.input-field.col.s6
-                input.validate(type="text", name="first_name", placeholder="First Name")
-                label(for="first_name")
-                    | First Name
-            div.input-field.col.s6
-                input.validate(type="text", name="last_name")
-                label(for="last_name") 
-                    | Last Name
-//- <div class="row">
-//-     <form class="col s12">
-//-       <div class="row">
-//-         <div class="input-field col s6">
-//-           <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-//-           <label for="first_name">First Name</label>
-//-         </div>
-//-         <div class="input-field col s6">
-//-           <input id="last_name" type="text" class="validate">
-//-           <label for="last_name">Last Name</label>
-//-         </div>
-//-       </div>
-//-       <div class="row">
-//-         <div class="input-field col s12">
-//-           <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-//-           <label for="disabled">Disabled</label>
-//-         </div>
-//-       </div>
-//-       <div class="row">
-//-         <div class="input-field col s12">
-//-           <input id="password" type="password" class="validate">
-//-           <label for="password">Password</label>
-//-         </div>
-//-       </div>
-//-       <div class="row">
-//-         <div class="input-field col s12">
-//-           <input id="email" type="email" class="validate">
-//-           <label for="email">Email</label>
-//-         </div>
-//-       </div>
-//-       <div class="row">
-//-         <div class="col s12">
-//-           This is an inline input field:
-//-           <div class="input-field inline">
-//-             <input id="email" type="email" class="validate">
-//-             <label for="email" data-error="wrong" data-success="right">Email</label>
-//-           </div>
-//-         </div>
-//-       </div>
-//-     </form>
-//-   </div>
+extends ../shared/master
+
+block content
+    div.row
+        form.col.s12(action="/auth/register", method="post")
+            div.row
+                h2
+                    span.col.s12
+                    | Create an account
+            div.row
+                div.input-field.col.s6
+                    input.validate(type="text", name="first_name", placeholder="First Name")
+                    label(for="first_name")
+                        | First Name
+                div.input-field.col.s6
+                    input.validate(type="text", name="last_name", placeholder="Last Name")
+                    label(for="last_name")
+                        | Last Name
+            div.row
+                div.input-field.col.s6
+                    input.validate(type="email", name="email", placeholder="Email")
+                    label(for="email")
+                        | Email Address
+                div.input-field.col.s6
+                    input.validate(type="password", name="password", placeholder="Password")
+                    label(for="password")
+                        | Password
+            div.row
+                button.btn(type="submit")
+                    | Create an account
