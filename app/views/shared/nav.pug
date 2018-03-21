@@ -1,12 +1,24 @@
 mixin nav()
+    // Dropdown Structure
+    ul#dropdown1.dropdown-content
+        li
+            a(href="#!")
+                | Genres
+        li.divider
+        li
+            a(href="#!")
+                | Platforms
+
     nav.main-nav.navbar-fixed
         div.nav-wrapper
-            a(href="#", class="brand-logo")
+            a.brand-logo(href="#")
                 | favicon
             ul.right.hide-on-med-and-down
                 li
-                    a(href="#")
+                    a.dropdown-button(href="#", data-activates="dropdown1")
                         | Games
+                        i.material-icons.right
+                            | arrow_drop_down
                 li
                     a(href="/auth/login")
                         | Log in
