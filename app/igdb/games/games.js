@@ -17,14 +17,17 @@ const fetchAllGames = async (requestsCount, limit, offset, allGames) => {
             'Accept': 'application/json',
         },
     });
-    allGames.push(games.data);
     requestsCount++;
+    allGames.push(games.data);
     offset = 50;
 
     await fetchAllGames(requestsCount, limit, offset, allGames);
 
     return allGames;
 };
+
+// fetchAllGames(0, 1, 0, []);
+
 
 module.exports = {
     fetchAllGames,
