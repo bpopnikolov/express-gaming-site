@@ -1,0 +1,51 @@
+extends ../shared/master
+block append head
+    link(rel="stylesheet", type="text/css", href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css")
+    link(rel="stylesheet", type="text/css", href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css")
+    link(rel="stylesheet", type="text/css", href='../../public/assets/styles/home/style.css')
+
+block append scripts
+    script(src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js")
+    script(src="../../public/assets/js/home/scripts.js")
+
+block content
+    div.row.game-search
+        div.row
+            div.col.s8.offset-s2
+                h2.center-align
+                    | Find your favorite game
+        div.row
+            form.col.s6.offset-s3(method="get")
+                div.row
+                    div.input-field.gs-field
+                        input#icon_prefix.validate(type='text')
+                        label(for='icon_prefix')
+                            | Search Here
+                    button.btn-floating.gs-button(type="submit" value="Submit")
+                        i.material-icons.gs-button-icon search
+    div.wr-slider
+        div.slider-games
+            div.game-box
+                img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
+                div.game-title
+                    | League of Legends
+            div.game-box
+                img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
+                div.game-title
+                    | League of Legends
+            div.game-box
+                img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
+                div.game-title
+                    | League of Legends
+            div.game-box
+                img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
+                div.game-title
+                    | League of Legends
+
+
+ 
+        
+
+
+
+
