@@ -3,7 +3,7 @@
 module.exports = (sequelize, DataTypes) => {
     const UserGameRating = sequelize.define('UserGameReview', {
         review: {
-            type: DataTypes.TEXT('large'),
+            type: DataTypes.TEXT(),
             allowNull: false,
         },
     }, {});
