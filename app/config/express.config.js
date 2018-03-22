@@ -22,8 +22,6 @@ const init = (app) => {
 
     // route: public/js/app.js
     app.use('/public', express.static(path.join(__dirname, '..', 'public')));
-
-
 };
 
 module.exports = {
