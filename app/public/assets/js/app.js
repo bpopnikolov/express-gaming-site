@@ -9,5 +9,15 @@ $(function () {
         alignment: 'left', // Displays dropdown with edge aligned to the left of button
         stopPropagation: false, // Stops event propagation
     });
-    $(".sidenav").sidenav();
+});
+
+$(function () {
+    $(".sidenav").sidenav({
+        menuWidth: 300, // Default is 300
+        edge: 'right', // Choose the horizontal origin
+        closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        draggable: true, // Choose whether you can drag to open on touch screens,
+        onOpen: function(el) { /* Do Stuff */ }, // A function to be called when sideNav is opened
+        onClose: function(el) { /* Do Stuff */ }, // A function to be called when sideNav is closed
+    });
 });
