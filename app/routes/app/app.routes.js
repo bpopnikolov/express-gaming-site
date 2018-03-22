@@ -3,13 +3,15 @@ const {
 } = require('express');
 
 const init = (app, data) => {
-    const rounter = new Router();
-    rounter
+    const router = new Router();
+    router
         .get('/', async (req, res) => {
+            console.log('User logged in: ', req.isAuthenticated());
+            console.log('user: ', req.user);
             res.render('app/home');
         });
 
-    app.use('/', rounter);
+    app.use('/', router);
 };
 
 module.exports = {

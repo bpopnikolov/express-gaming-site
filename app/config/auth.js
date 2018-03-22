@@ -8,13 +8,13 @@ const {
 } = require('passport-local');
 
 const users = [{
-    email: 'gogo@gogo.com',
+    username: 'gogo@gogo.com',
     password: 'gogo123',
 }];
 const init = (app) => {
-    passport.use(new Strategy((email, password, done) => {
-        const user = users.find((dbUser) => dbUser.email === email);
-        console.log(user);
+    passport.use(new Strategy((username, password, done) => {
+        const user = users.find((dbUser) => dbUser.username === username);
+        // console.log(user);
         if (!user) {
             console.log('invalid user');
             return done(null, false, {
@@ -32,11 +32,20 @@ const init = (app) => {
         // password is correct as well
         return done(null, user);
     }));
-
     passport.serializeUser((user, done) => {
-        console.log('serialize');
-        done(null, user, user.username);
+        console.log('cookie sent to user');
+        return done(null, user.username);
     });
+
+    passport.deserializeUser((username, done) => {
+        const user = users.find((dbUser) => dbUser.username === username);
+        if (!user) {
+            return done(new Error('Invalid user'));
+        }
+        console.log('cookie sent to server by user');
+        return done(null, user);
+    });
+
     app.use(cookieParser());
     app.use(session({
         secret: 'Beer or two?',

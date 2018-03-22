@@ -9,19 +9,26 @@ mixin nav()
             a(href="#!")
                 | Platforms
 
-    nav.main-nav.navbar-fixed
-        div.nav-wrapper
-            a.brand-logo(href="#")
-                | favicon
-            ul.right.hide-on-med-and-down
-                li
-                    a.dropdown-button(href="#", data-activates="dropdown1")
-                        | Games
-                        i.material-icons.right
-                            | arrow_drop_down
-                li
-                    a(href="/auth/login")
-                        | Log in
-                li
-                    a(href="/auth/register")
-                        | Register
+    div.navbar-fixed
+        nav.main-nav
+            div.nav-wrapper
+                a.brand-logo(href="#")
+                    | favicon
+                ul.right.hide-on-med-and-down
+                    li
+                        a.dropdown-button(href="#", data-activates="dropdown1")
+                            | Games
+                            i.material-icons.right
+                                | arrow_drop_down
+                    if user
+                        =user.username
+                        li
+                            a(href="/auth/logout")
+                                | Log out
+                    else
+                        li
+                            a(href="/auth/login")
+                                | Log in
+                        li
+                            a(href="/auth/register")
+                                | Register
