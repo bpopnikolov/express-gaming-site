@@ -2,6 +2,8 @@ const {
     Router,
 } = require('express');
 
+const passport = require('passport');
+
 const init = (app, data) => {
     const router = new Router();
     router
@@ -12,12 +14,17 @@ const init = (app, data) => {
             res.render('auth/login');
         })
         .post('/register', async (req, res) => {
-            // TODO
+            // to do
             res.redirect('/auth/login');
         })
-        .post('/login', async (req, res) => {
-            // TODO
-            res.redirect('/auth/register');
+        .post('/login', (req, res, next) => {
+            passport.authenticate('local', (err, user, info) => {
+                if (err) {
+                    console.log(err);
+                }
+                res.redirect('/auth/register');
+                // console.log(info);
+            })(req, res, next);
         });
 
     app.use('/auth', router);
@@ -26,4 +33,3 @@ const init = (app, data) => {
 module.exports = {
     init,
 };
-

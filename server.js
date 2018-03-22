@@ -3,6 +3,8 @@ const app = require('./app/app');
 const debug = require('debug')('http');
 const http = require('http');
 
+// init auth.js
+
 const normalizePort = (val) => {
     const port = parseInt(val, 10);
 
