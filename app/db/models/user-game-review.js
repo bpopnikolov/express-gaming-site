@@ -1,14 +1,14 @@
 /* eslint new-cap: 0 */
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const UserGameRating = sequelize.define('UserGameReview', {
+    const UserGameReview = sequelize.define('UserGameReview', {
         review: {
             type: DataTypes.TEXT(),
             allowNull: false,
         },
     }, {});
-    UserGameRating.associate = (models) => {
+    UserGameReview.associate = (models) => {
         // associations can be defined here
     };
-    return UserGameRating;
+    return UserGameReview;
 };

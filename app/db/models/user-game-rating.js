@@ -7,6 +7,15 @@ module.exports = (sequelize, DataTypes) => {
                 isNumeric: true,
             },
         },
+        /* userId: {
+            type: DataTypes.INTEGER,
+            unique: 'compositeIndex',
+        },
+        gameId: {
+            type: DataTypes.INTEGER,
+            unique: 'compositeIndex',
+        },*/
+
     }, {});
     UserGameRating.associate = (models) => {
         // associations can be defined here
