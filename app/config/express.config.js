@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 
 const init = (app) => {
     // view engine setup
-    app.set('views', path.join(__dirname, '..', 'views'));
+    app.set('views', path.join(__dirname, '..', '..', 'views'));
     app.set('view engine', 'pug');
 
     // uncomment after placing your favicon in /public
@@ -21,7 +21,7 @@ const init = (app) => {
     }));
 
     // route: public/js/app.js
-    app.use('/public', express.static(path.join(__dirname, '..', 'public')));
+    app.use('/public', express.static(path.join(__dirname, '..', '..', 'public')));
 };
 
 module.exports = {

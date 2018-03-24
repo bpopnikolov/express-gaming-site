@@ -1,3 +1,5 @@
+
+// TODO: change file name to home.js
 $(document).ready(function () {
     $('.slider-games').slick({
         infinite: true,
