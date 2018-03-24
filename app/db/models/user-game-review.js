@@ -9,6 +9,27 @@ module.exports = (sequelize, DataTypes) => {
     }, {});
     UserGameReview.associate = (models) => {
         // associations can be defined here
+        const {
+            User,
+            Game,
+            UserGameRating,
+        } = models;
+
+        UserGameReview.belongsTo(Game, {
+            foreignKey: {
+                unique: 'composite_review_index',
+                allowNull: false,
+            },
+            onDelete: 'CASCADE',
+        });
+
+        UserGameReview.belongsTo(User, {
+            foreignKey: {
+                unique: 'composite_review_index',
+                allowNull: false,
+            },
+            onDelete: 'CASCADE',
+        });
     };
     return UserGameReview;
 };
