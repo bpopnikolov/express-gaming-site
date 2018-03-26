@@ -2,7 +2,7 @@ const {
     Router,
 } = require('express');
 
-const init = (app, data) => {
+const init = (app, dbWrapper) => {
     const router = new Router();
     router
         .get('/', async (req, res) => {

@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const init = (app, data) => {
+const init = (app, dbWrapper) => {
     /** dynamically load all routes */
     fs.readdirSync(__dirname)
         .filter((filename) => filename !== path.basename(__filename))
@@ -12,7 +12,7 @@ const init = (app, data) => {
         .map((filename) => path.join(__dirname, filename))
         .forEach((modulePath) => {
             const route = require(modulePath);
-            route.init(app, data);
+            route.init(app, dbWrapper);
         });
 };
 

@@ -1,8 +1,8 @@
 const authRoutes = require('./auth.routes');
 
 
-const init = (app, data) => {
-    authRoutes.init(app, data);
+const init = (app, dbWrapper) => {
+    authRoutes.init(app, dbWrapper);
 };
 
 module.exports = {
