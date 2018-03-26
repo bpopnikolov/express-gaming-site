@@ -1,6 +1,6 @@
 const express = require('express');
 
-const data = {};
+const dbWrapper = require('./database-wrapper');
 
 const app = express();
 
@@ -14,6 +14,6 @@ const attachUserToResponse = (req, res, next) => {
 
 app.use(attachUserToResponse);
 
-require('./routes').init(app, data);
+require('./routes').init(app, dbWrapper);
 
 module.exports = app;

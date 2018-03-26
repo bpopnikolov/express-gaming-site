@@ -4,7 +4,7 @@ const {
 
 const passport = require('passport');
 
-const init = (app, data) => {
+const init = (app, dbWrapper) => {
     const router = new Router();
     router
         .get('/register', async (req, res) => {
