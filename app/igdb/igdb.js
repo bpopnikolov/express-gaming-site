@@ -64,22 +64,21 @@ const addGamesToDatabase = async (games) => {
         let videos = [];
         if (gameObj.videos) {
             videos = gameObj.videos.map((video) =>
-                parseScreenshot(video));
+                parseVideo(video));
         }
 
-        console.log(game);
-        console.log(publishers);
-        console.log(genres);
-        console.log(gameModes);
-        console.log(websites);
-        console.log(platforms);
-        console.log(screenshots);
+        // console.log(game);
+        // console.log(publishers);
+        // console.log(genres);
+        // console.log(gameModes);
+        // console.log(websites);
+        // console.log(platforms);
+        // console.log(screenshots);
         console.log(videos);
     })).catch((err) => console.log(err));
 };
 
 const run = async () => {
-
     const games = await getAllGames(1);
     // console.log(Array.isArray(games));
     await addGamesToDatabase(games);

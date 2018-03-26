@@ -71,8 +71,8 @@ const parseScreenshot = (obj) => {
 
 const parseVideo = (obj) => {
     let url = '';
-    if (obj.url) {
-        url = `http:${obj.url}`;
+    if (obj.video_id) {
+        url = `https://www.youtube.com/watch?v=${obj.video_id}`;
     }
     return {
         url: url,
