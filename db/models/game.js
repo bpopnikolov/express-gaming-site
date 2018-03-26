@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
         },
         summary: {
             type: DataTypes.TEXT(),
@@ -19,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         releaseDate: {
             type: DataTypes.DATEONLY,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 isDate: true,
             },
@@ -27,9 +28,6 @@ module.exports = (sequelize, DataTypes) => {
         cover: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                isUrl: true,
-            },
         },
 
     }, {});
