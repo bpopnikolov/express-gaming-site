@@ -43,7 +43,7 @@ const parseGameMode = (obj) => {
 const parseWebsite = (obj) => {
     let url = '';
     if (obj.url) {
-        url = `http:${obj.url}`;
+        url = obj.url;
     }
     return {
         url: url,

@@ -17,8 +17,8 @@ const init = (app) => {
         passwordField: 'password',
         // allows us to pass back the entire request to the callback
         passReqToCallback: true,
-    }, (req, email, password, done) => {
-        const user = dbWrapper.users.getByEmail(email);
+    }, async (req, email, password, done) => {
+        const user = await dbWrapper.users.getByEmail('');
 
         // console.log(user);
         if (!user) {
@@ -29,7 +29,7 @@ const init = (app) => {
         }
 
         // user exists in db
-        if (!(user.comaprePassword(password))) {
+        if (!(user.comparePassword(password))) {
             console.log('Invalid password');
             return done(null, false, {
                 message: 'Incorrect password.',
@@ -40,11 +40,11 @@ const init = (app) => {
     }));
     passport.serializeUser((user, done) => {
         console.log('cookie sent to user');
-        return done(null, user.username);
+        return done(null, user.email);
     });
 
-    passport.deserializeUser((email, done) => {
-        const user = dbWrapper.users.getByEmail(email);
+    passport.deserializeUser(async (email, done) => {
+        const user = await dbWrapper.users.getByEmail(email);
         if (!user) {
             return done(new Error('Invalid user'));
         }

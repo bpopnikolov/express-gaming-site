@@ -10,6 +10,8 @@ const {
     parseWebsite,
 } = require('./parsers/parsers');
 
+const dbWrapper = require('../database-wrapper');
+
 
 const getAllGames = async (limit) => {
     let allGames = await gamesApi.fetchAllGames(0, limit, 0, []);
@@ -20,7 +22,7 @@ const getAllGames = async (limit) => {
 };
 
 const addGamesToDatabase = async (games) => {
-    await Promise.all(games.map((gameObj) => {
+    await Promise.all(games.map(async (gameObj) => {
         const game = parseGame(gameObj);
 
         let publishers = [];
@@ -28,7 +30,6 @@ const addGamesToDatabase = async (games) => {
             publishers = gameObj.publishers.map((publisher) =>
                 parsePublisher(publisher));
         }
-
 
         let genres = [];
         if (gameObj.genres) {
@@ -67,14 +68,16 @@ const addGamesToDatabase = async (games) => {
                 parseVideo(video));
         }
 
-        // console.log(game);
-        // console.log(publishers);
-        // console.log(genres);
-        // console.log(gameModes);
-        // console.log(websites);
-        // console.log(platforms);
-        // console.log(screenshots);
-        console.log(videos);
+        const savedGame = await dbWrapper.games.create(game);
+        console.log(savedGame);
+        savedGame.setPublishers(publishers);
+        savedGame.setGenres(genres);
+        savedGame.setGameModes(gameModes);
+        savedGame.setWebsites(websites);
+        savedGame.setPlatforms(platforms);
+        savedGame.setScreenshots(screenshots);
+        savedGame.setVideos(videos);
+        return savedGame;
     })).catch((err) => console.log(err));
 };
 

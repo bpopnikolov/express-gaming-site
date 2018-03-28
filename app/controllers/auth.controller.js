@@ -3,15 +3,17 @@ const errorsConfig = require('../config/errors.config');
 const dbWrapper = require('../database-wrapper');
 
 const login = (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
+
+    passport.authenticate('local', (err, user, authError) => {
         if (err) {
             console.log(err);
             // render the login view with error
         }
 
-        if (info) {
+        if (authError) {
             // render login with some error msg
             // user is not authenticated
+            console.log(authError);
         }
 
         console.log(user);
@@ -31,7 +33,6 @@ const login = (req, res, next) => {
 };
 
 const register = async (req, res, next) => {
-
     const firstname = req.body.first_name;
     const lastname = req.body.last_name;
     const email = req.body.email;
