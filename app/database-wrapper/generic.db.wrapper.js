@@ -4,6 +4,16 @@ class GenericDbWrapper {
         this.includes = includes;
     }
 
+    getById(id) {
+        return this.Model.findById(id, {
+            include: this.includes,
+        });
+    }
+
+    getAll(obj) {
+        return this.Model.findAll();
+    }
+
     create(obj) {
         return this.Model.create(obj);
     }
@@ -31,9 +41,6 @@ class GenericDbWrapper {
             defaults: obj,
         });
     }
-
-    getAll(obj) {
-        return this.Model.findAll();
-    }
 }
+
 module.exports = GenericDbWrapper;

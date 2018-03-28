@@ -2,45 +2,27 @@ const {
     Router,
 } = require('express');
 
-const passport = require('passport');
+const AuthController = require('../../controllers/auth.controller');
 
 const init = (app, dbWrapper) => {
     const router = new Router();
+    const controller = new AuthController(dbWrapper);
+
     router
         .get('/register', async (req, res) => {
             res.render('auth/register');
         })
-        .post('/register', async (req, res) => {
-            // to do
-            res.redirect('/auth/login');
-        })
+        .post('/register', controller.register)
         .get('/login', async (req, res) => {
             res.render('auth/login');
         })
-        .post('/login',
-            passport.authenticate('local', {
-                successRedirect: '/',
-                failureRedirect: '/login',
-                failureFlash: false,
-            }))
+        .post('/login', controller.login)
         .get('/logout', (req, res) => {
             req.logout();
             res.redirect('/');
         });
-        // .post('/login', (req, res, next) => {
-        //     passport.authenticate('local', (err, user, info) => {
-        //         if (err) {
-        //             console.log(err);
-        //         }
-        //         console.log(user);
-        //         console.log('authenticated');
-        //         req.logIn(user, (error) => {
-        //             console.log('Test123');
-        //             res.redirect('/');
-        //         });
-        //         // console.log(info);
-        //     })(req, res, next);
-        // });
+    // .post('/login', (req, res, next) => {
+    // });
 
     app.use('/auth', router);
 };
