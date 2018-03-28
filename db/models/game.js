@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         summary: {
             type: DataTypes.TEXT(),
-            allowNull: false,
+            allowNull: true,
         },
         rating: {
             type: DataTypes.FLOAT,
@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 isNumeric: true,
             },
+        },
+        ratingCount: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
         },
         releaseDate: {
             type: DataTypes.DATEONLY,
@@ -31,6 +35,13 @@ module.exports = (sequelize, DataTypes) => {
         },
 
     }, {});
+
+    Game.hook('beforeValidate', (game, options) => {
+        if (!game.cover) {
+            game.cover = '/public/assets/img/noImg.jpg';
+        }
+    });
+
     Game.associate = (models) => {
         // associations can be defined here
         const {

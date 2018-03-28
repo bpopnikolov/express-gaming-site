@@ -9,9 +9,6 @@ module.exports = (sequelize, DataTypes) => {
     logo: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        isUrl: true,
-      },
     },
     description: {
       type: DataTypes.TEXT(),
@@ -19,13 +16,20 @@ module.exports = (sequelize, DataTypes) => {
     },
     website: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         isUrl: true,
       },
     },
 
   }, {});
+
+  Publisher.hook('beforeValidate', (publisher, options) => {
+    if (!publisher.logo) {
+      publisher.logo = '/public/assets/img/noImg.jpg';
+    }
+  });
+
   Publisher.associate = (models) => {
     // associations can be defined here
   };
