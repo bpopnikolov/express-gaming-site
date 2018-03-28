@@ -7,13 +7,19 @@ const {
     Strategy,
 } = require('passport-local');
 
-const users = [{
-    username: 'gogo@gogo.com',
-    password: 'gogo123',
-}];
+const dbWrapper = require('../database-wrapper');
+
 const init = (app) => {
-    passport.use(new Strategy((username, password, done) => {
-        const user = users.find((dbUser) => dbUser.username === username);
+    passport.use(new Strategy({
+        // by default, local strategy uses username and password,
+        // we will override with email
+        usernameField: 'email',
+        passwordField: 'password',
+        // allows us to pass back the entire request to the callback
+        passReqToCallback: true,
+    }, (req, email, password, done) => {
+        const user = dbWrapper.users.getByEmail(email);
+
         // console.log(user);
         if (!user) {
             console.log('invalid user');
@@ -23,7 +29,7 @@ const init = (app) => {
         }
 
         // user exists in db
-        if (!(user.password === password)) {
+        if (!(user.comaprePassword(password))) {
             console.log('Invalid password');
             return done(null, false, {
                 message: 'Incorrect password.',
@@ -37,8 +43,8 @@ const init = (app) => {
         return done(null, user.username);
     });
 
-    passport.deserializeUser((username, done) => {
-        const user = users.find((dbUser) => dbUser.username === username);
+    passport.deserializeUser((email, done) => {
+        const user = dbWrapper.users.getByEmail(email);
         if (!user) {
             return done(new Error('Invalid user'));
         }
