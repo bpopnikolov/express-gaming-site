@@ -30,17 +30,17 @@ module.exports = (sequelize, DataTypes) => {
         },
     }, {});
 
-    User.hook('beforeSave', async (user, next) => {
+    User.hook('beforeSave', async (user, option) => {
         const SALT_FACTOR = 5;
 
         if (!user.changed('password')) {
-            return next();
+            return user;
         }
 
         const hash = await bcrypt.hash(user.password, SALT_FACTOR);
         user.password = hash;
 
-        return next();
+        return user;
     });
 
     User.prototype.comparePassword = async function(passwordAttempt) {

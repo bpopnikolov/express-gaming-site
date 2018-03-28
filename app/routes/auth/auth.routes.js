@@ -6,17 +6,16 @@ const AuthController = require('../../controllers/auth.controller');
 
 const init = (app, dbWrapper) => {
     const router = new Router();
-    const controller = new AuthController(dbWrapper);
 
     router
         .get('/register', async (req, res) => {
             res.render('auth/register');
         })
-        .post('/register', controller.register)
+        .post('/register', AuthController.register)
         .get('/login', async (req, res) => {
             res.render('auth/login');
         })
-        .post('/login', controller.login)
+        .post('/login', AuthController.login)
         .get('/logout', (req, res) => {
             req.logout();
             res.redirect('/');
