@@ -10,23 +10,18 @@ class GamesController {
         if (await this.dbWrapper.hasRecord(gameObj)) {
             throw Error('Game with the same title allready exists!');
         }
-
         if (!gameObj.summary || gameObj.summary.length <= 0) {
             gameObj.summary = 'this game have no summary';
         }
-
         if (!gameObj.rating) {
             gameObj.rating = 0;
         }
-
         if (!gameObj.releaseDate) {
             gameObj.releaseDate = null;
         }
-
         if (!gameObj.cover) {
             gameObj.cover = '/public/assets/img/noImg.jpg';
         }
-
         return this.dbWrapper.games.create(gameObj);
     }
 
