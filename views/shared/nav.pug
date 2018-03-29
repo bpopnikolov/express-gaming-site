@@ -53,10 +53,15 @@ mixin nav()
                           i.material-icons.right(style='margin-right:0;') arrow_drop_down
                         .collapsible-body
                           ul
-                            li
-                              each gener in genres
-                                a.waves-effect.waves-purple(href='#')
-                                  | #{gener.name}
+                            if genres.length > 0
+                                li
+                                  each genre in genres
+                                    a.waves-effect.waves-purple(href='#')
+                                        | #{genre.name}
+                            else
+                                li
+                                    a.waves-effect.waves-purple(href='#')
+                                        | 
                             li.divider
                 li
                     ul.collapsible.collapsible-accordion
@@ -66,10 +71,15 @@ mixin nav()
                           i.material-icons.right(style='margin-right:0;') arrow_drop_down
                         .collapsible-body
                           ul
-                            li
-                              each platform in platforms
-                                a.waves-effect.waves-purple(href='#')
-                                  | #{platform.name}
+                            if platforms.length > 0
+                                li
+                                  each platform in platforms
+                                    a.waves-effect.waves-purple(href='#')
+                                        | #{platform.name}
+                            else
+                                li
+                                    a.waves-effect.waves-purple(href='#')
+                                        | 
           .divider
         if user
             li
@@ -99,15 +109,26 @@ mixin nav()
                     | arrow_drop_down
 
         ul#genresDropdown.dropdown-content.dropdown-nested
-            each genre in genres
-                li
-                 a.dropdown-button(href="#")
-                    | #{genre.name}
-                li.divider
-
+            if genres.length > 0
+                each genre in genres
+                    li
+                     a.dropdown-button(href="#")
+                        | #{genre.name}
+                    li.divider
+            else 
+                    li
+                     a.dropdown-button(href="#")
+                        | 
+                    li.divider
         ul#platformsDropdown.dropdown-content.dropdown-nested
-            each platform in platforms
-                li
-                 a.dropdown-button(href="#")
-                    | #{platform.name}
-                li.divider
+            if platforms.length > 0
+                each platform in platforms
+                    li
+                     a.dropdown-button(href="#")
+                        | #{platform.name}
+                    li.divider
+            else 
+                    li
+                     a.dropdown-button(href="#")
+                        | 
+                    li.divider

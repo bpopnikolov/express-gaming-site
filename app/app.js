@@ -15,13 +15,13 @@ const attachUserToResponse = (req, res, next) => {
 };
 
 const attachGenresToResponse = async (req, res, next) => {
-    const genres = await GenresController.getAll();
+    const genres = await GenresController.getAll() || [];
     res.locals.genres = genres;
     next();
 };
 
 const attachPlatformsToResponse = async (req, res, next) => {
-    const platforms = await PlatformsController.getAll();
+    const platforms = await PlatformsController.getAll() || [];
     res.locals.platforms = platforms;
     next();
 };
