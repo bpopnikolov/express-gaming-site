@@ -1,0 +1,128 @@
+extends ../shared/master
+
+block append head
+    link(rel="stylesheet", type="text/css", href='public/assets/styles/games/game.css')
+
+block append scripts
+    script(src="/public/assets/js/core/games/gamejs.js")
+
+block content
+    //- div.carousel-wrapper
+    //-     div.carousel.carousel-slider
+    //-         a.carousel-item(href='#one!')
+    //-             img(src='https://images.igdb.com/igdb/image/upload/t_screenshot_big/y5sazxz3klikoqxrxyje.jpg')
+    div#index-banner.parallax-container
+        div.section.no-pad-bot
+            div.container
+                div.row
+                    br
+                    br
+                    img.game-cover.col.m6.s12(src="https://images.igdb.com/igdb/image/upload/t_screenshot_big/y5sazxz3klikoqxrxyje.jpg")
+                    h1.header.center.teal-text.text-lighten-2.col.s12.m6
+                        | Game name
+                    div.center
+                        h5.header.col.s12.m6.light
+                            | Release date: 01/01/2019
+                    div.center
+                        h5.header.col.s12.m6.light
+                            a(href='#')
+                                | Publishers
+                    div.center
+                        h5.header.col.s12.m6.light
+                            a(href='#')
+                                | More could be added...
+                    br
+                    br
+        div.parallax
+            img(src='https://images.igdb.com/igdb/image/upload/t_screenshot_big/y5sazxz3klikoqxrxyje.jpg')
+
+    div.container
+        div.section
+            // Icon Section
+            div.row
+                div.col.s12.m8
+                    div.icon-block
+                        h5.center
+                            | About
+                        p.light
+                            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto iste dolorem eius laboriosam alias unde sed, quis accusamus aliquid animi laborum ad doloribus magni. Asperiores numquam rerum illo ab quasi?
+                        p.genre
+                            a(href="#")
+                                | Genres
+                        p.platform
+                            a(href="#")
+                                | Platforms
+                        p.edikakvosi
+                            a(href="#")
+                                | this section could be split into 2 x 4
+                        p.etc
+                            a(href="#")
+                                | And so on...
+
+                form(action="/:name", method="post")
+                    div.col.s12.m4
+                        h5.center
+                            | How would you rate this game?
+                        p.rating.center
+                            a#rate1(href="#")
+                                i.small.material-icons.hoverable
+                                    | star_border
+                            a#rate2(href="#")
+                                i.small.material-icons.hoverable
+                                    | star_border
+                            a#rate3(href="#")
+                                i.small.material-icons.hoverable
+                                    | star_border
+                    div.col.s12.m4
+                        h5.center
+                            | Add a public comment
+                        textarea#review(name="review")
+                        div
+                            button.btn.waves-effect.waves-light(type="submit")
+                                    | Comment
+
+    div.container
+        div.row
+            div.col.s12.m6
+                div.slider
+                    ul.slides
+                        li
+                            img(src='https://lorempixel.com/580/250/nature/1')
+                            div.caption.center-align
+                                h3
+                                    | This is SS1. Center Aligned Caption
+                                h5.light.grey-text.text-lighten-3
+                                    | What?
+                        li
+                            img(src='https://lorempixel.com/580/250/nature/2')
+                            div.caption.left-align
+                                h3
+                                    | Left Aligned Caption
+                                h5.light.grey-text.text-lighten-3
+                                    | What?
+                        li
+                            img(src='https://lorempixel.com/580/250/nature/3')
+                            div.caption.right-align
+                                h3
+                                    | Right Aligned Caption
+                                h5.light.grey-text.text-lighten-3
+                                    | What?
+            div.col.s12.m6
+                div.slider.valign-wrapper
+                    ul.slides
+                        li
+                            div.video-container
+                                iframe(src="https://www.youtube.com/embed/NJzoBmVPeYw", frameborder="0")
+                                    div.caption.center-align
+                                        h3
+                                            | Video 1
+                                        h5.light.grey-text.text-lighten-3
+                                            | Play me
+                        li
+                            div.video-container
+                                iframe(src="https://www.youtube.com/embed/wsrvmNtWU4E", frameborder="0")
+                                    div.caption.center-align
+                                        h3
+                                            | Video 2
+                                        h5.light.grey-text.text-lighten-3
+                                            | Play video 2
