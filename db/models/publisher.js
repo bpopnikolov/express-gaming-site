@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     logo: {
       type: DataTypes.STRING,

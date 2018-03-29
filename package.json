@@ -4,7 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "make-migration": "cd db && node ../node_modules/sequelize-auto-migrations/bin/makemigration --name",
+        "fetch-games": "cd app/igdb && node igdb"
     },
     "keywords": [],
     "author": "Borislav Popnikolov <borislav.popnikolov@gmail.com>",

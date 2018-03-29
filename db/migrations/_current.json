@@ -11,6 +11,7 @@
                 },
                 "name": {
                     "allowNull": false,
+                    "unique": true,
                     "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {
@@ -86,6 +87,7 @@
                 },
                 "name": {
                     "allowNull": false,
+                    "unique": true,
                     "seqType": "Sequelize.STRING"
                 },
                 "logo": {
@@ -122,6 +124,7 @@
                 },
                 "name": {
                     "allowNull": false,
+                    "unique": true,
                     "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {
@@ -146,6 +149,7 @@
                 },
                 "name": {
                     "allowNull": false,
+                    "unique": true,
                     "seqType": "Sequelize.STRING"
                 },
                 "logo": {
@@ -185,6 +189,7 @@
                     "validate": {
                         "isUrl": true
                     },
+                    "unique": true,
                     "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {
@@ -330,6 +335,7 @@
                     "validate": {
                         "isEmail": true
                     },
+                    "unique": true,
                     "seqType": "Sequelize.STRING"
                 },
                 "password": {
@@ -361,6 +367,7 @@
                     "validate": {
                         "isUrl": true
                     },
+                    "unique": true,
                     "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {
@@ -395,6 +402,7 @@
                 },
                 "url": {
                     "allowNull": false,
+                    "unique": true,
                     "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {

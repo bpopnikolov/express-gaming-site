@@ -27,7 +27,7 @@ var Sequelize = require('sequelize');
 var info = {
     "revision": 1,
     "name": "initial",
-    "created": "2018-03-28T17:39:50.070Z",
+    "created": "2018-03-29T18:34:05.357Z",
     "comment": ""
 };
 
@@ -58,6 +58,7 @@ var migrationCommands = [{
                 },
                 "email": {
                     "type": Sequelize.STRING,
+                    "unique": true,
                     "validate": {
                         "isEmail": true
                     },
@@ -92,6 +93,7 @@ var migrationCommands = [{
                 },
                 "name": {
                     "type": Sequelize.STRING,
+                    "unique": true,
                     "allowNull": false
                 },
                 "createdAt": {
@@ -119,6 +121,7 @@ var migrationCommands = [{
                 },
                 "name": {
                     "type": Sequelize.STRING,
+                    "unique": true,
                     "allowNull": false
                 },
                 "logo": {
@@ -158,6 +161,7 @@ var migrationCommands = [{
                 },
                 "name": {
                     "type": Sequelize.STRING,
+                    "unique": true,
                     "allowNull": false
                 },
                 "createdAt": {
@@ -185,6 +189,7 @@ var migrationCommands = [{
                 },
                 "name": {
                     "type": Sequelize.STRING,
+                    "unique": true,
                     "allowNull": false
                 },
                 "logo": {
@@ -224,6 +229,7 @@ var migrationCommands = [{
                 },
                 "url": {
                     "type": Sequelize.STRING,
+                    "unique": true,
                     "allowNull": false
                 },
                 "createdAt": {
@@ -405,6 +411,7 @@ var migrationCommands = [{
                 },
                 "url": {
                     "type": Sequelize.STRING,
+                    "unique": true,
                     "validate": {
                         "isUrl": true
                     },
@@ -445,6 +452,7 @@ var migrationCommands = [{
                 },
                 "url": {
                     "type": Sequelize.STRING,
+                    "unique": true,
                     "validate": {
                         "isUrl": true
                     },

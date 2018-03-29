@@ -132,8 +132,8 @@ const addGamesToDatabase = async (games) => {
 
 const run = async () => {
     const games = await getAllGames(1);
-    // console.log(Array.isArray(games));
     await addGamesToDatabase(games);
+    console.log('Games were added to database.');
 };
 
 run();

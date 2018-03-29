@@ -2,29 +2,20 @@ mixin nav()
     div.navbar-fixed
         nav.main-nav.deep-purple.lighten-1
             div.nav-wrapper
-                a.brand-logo(href="/")
-                    | Gameszila
+                a.brand-logo.right(href="/")
+                    | Gameszilla
                 a.button-collapse.hide-on-large(href='#', data-activates='mobile-demo')
                     i.material-icons menu
-                ul.right.hide-on-med-and-down
+                ul.left.hide-on-med-and-down
                     if user
                         li
                             a(href="/user/profile")
                                 | Hello, #{user.firstname}
                     li
-                        a.dropdown-button(href="#", data-activates="gamesDropdown")
+                        a#gamesDropdownTrigger.dropdown-button(href="#", data-activates="gamesDropdown")
                             | Games 
                             i.material-icons.right
                                 | arrow_drop_down 
-                            // Dropdown Structure
-                        ul#gamesDropdown.dropdown-content
-                            li
-                                a(href="#!")
-                                    | Genres
-                            li.divider
-                            li
-                                a(href="#!")
-                                    | Platforms
                     if user
                         li
                             a(href="/auth/logout")
@@ -41,42 +32,82 @@ mixin nav()
     ul#mobile-demo.side-nav
       li.sidenav-header.deep-purple.lighten-1
             if user
-              a.waves-effect.waves-deep-purple.center-align.white-text(href="#")
+              a.waves-effect.waves-purple.center-align.white-text(href="#")
                h5 #{user.firstname}
             else 
-              a.waves-effect.waves-deep-purple.center-align.white-text(href="#")
+              a.waves-effect.waves-purple.center-align.white-text(href="#")
                h5 Gameszilla
       li.white
         ul.collapsible.collapsible-accordion
           li
-            a.collapsible-header.center-align
+            a.collapsible-header.waves-effect.waves-purple.center-align
               | Games
               i.material-icons.right(style='margin-right:0;') arrow_drop_down
             .collapsible-body
               ul
                 li
-                  a.waves-effect.waves-deep-purple(href='#')
-                    i.material-icons swap_horiz
-                    | Genres
-                    span.new.badge.right.yellow.grey.lighten-1(data-badge-caption='updated')
+                    ul.collapsible.collapsible-accordion
+                      li
+                        a.collapsible-header.waves-effect.waves-purple.center-align
+                          | Genres
+                          i.material-icons.right(style='margin-right:0;') arrow_drop_down
+                        .collapsible-body
+                          ul
+                            li
+                              each gener in genres
+                                a.waves-effect.waves-purple(href='#')
+                                  | #{gener.name}
+                            li.divider
                 li
-                  a.waves-effect.waves-deep-purple(href='#')
-                    i.material-icons swap_horiz
-                    | Platforms
-                    span.new.badge.right.yellow.darken-3
-                li
+                    ul.collapsible.collapsible-accordion
+                      li
+                        a.collapsible-header.waves-effect.waves-purple.center-align
+                          | Platforms
+                          i.material-icons.right(style='margin-right:0;') arrow_drop_down
+                        .collapsible-body
+                          ul
+                            li
+                              each platform in platforms
+                                a.waves-effect.waves-purple(href='#')
+                                  | #{platform.name}
           .divider
         if user
             li
-                a.waves-effect.waves-deep-purple(href="/auth/logout")
+                a.waves-effect.waves-purple(href="/auth/logout")
                     i.material-icons.mdi.mdi-logout
                     | Log out
         else
             li
-                a.waves-effect.waves-deep-purple(href="/auth/login")
+                a.waves-effect.waves-purple(href="/auth/login")
                     i.material-icons.mdi.mdi-login
                     | Log in
             li
-                a.waves-effect.waves-deep-purple(href="/auth/register")
+                a.waves-effect.waves-purple(href="/auth/register")
                     i.material-icons.mdi.mdi-account-plus
                     | Register
+    ul#gamesDropdown.dropdown-content.dropdown-nested
+        li
+            a#genresDropdownTrigger.dropdown-button(href="#" data-activates="genresDropdown")
+                | Genres
+                i.material-icons.right
+                    | arrow_drop_down
+        li.divider
+        li
+            a#platformsDropdownTrigger.dropdown-button(href="#" data-activates="platformsDropdown")
+                | Platforms
+                i.material-icons.right
+                    | arrow_drop_down
+
+        ul#genresDropdown.dropdown-content.dropdown-nested
+            each genre in genres
+                li
+                 a.dropdown-button(href="#")
+                    | #{genre.name}
+                li.divider
+
+        ul#platformsDropdown.dropdown-content.dropdown-nested
+            each platform in platforms
+                li
+                 a.dropdown-button(href="#")
+                    | #{platform.name}
+                li.divider
