@@ -68,16 +68,65 @@ const addGamesToDatabase = async (games) => {
                 parseVideo(video));
         }
 
-        const savedGame = await dbWrapper.games.create(game);
-        console.log(savedGame);
-        savedGame.setPublishers(publishers);
-        savedGame.setGenres(genres);
-        savedGame.setGameModes(gameModes);
-        savedGame.setWebsites(websites);
-        savedGame.setPlatforms(platforms);
-        savedGame.setScreenshots(screenshots);
-        savedGame.setVideos(videos);
-        return savedGame;
+        let savedPublishers = await Promise.all(
+            publishers.map((publisher) => {
+                return dbWrapper.publishers.findOrCreate(publisher);
+            }));
+        // console.log(savedPublishers);
+        savedPublishers = savedPublishers.map((publisher) => publisher[0].id);
+
+        let savedGenres = await Promise.all(
+            genres.map((genre) => {
+                return dbWrapper.genres.findOrCreate(genre);
+            }));
+
+        savedGenres = savedGenres.map((genre) => genre[0].id);
+
+        let savedGameModes = await Promise.all(
+            gameModes.map((gameMode) => {
+                return dbWrapper.gameModes.findOrCreate(gameMode);
+            }));
+
+        savedGameModes = savedGameModes.map((gameMode) => gameMode[0].id);
+
+        let savedWebsites = await Promise.all(
+            websites.map((website) => {
+                return dbWrapper.websites.findOrCreate(website);
+            }));
+
+        savedWebsites = savedWebsites.map((website) => website[0].id);
+
+        let savedPlatforms = await Promise.all(
+            platforms.map((platform) => {
+                return dbWrapper.platforms.findOrCreate(platform);
+            }));
+
+        savedPlatforms = savedPlatforms.map((platform) => platform[0].id);
+
+
+        const savedGame = await dbWrapper.games.findOrCreate(game);
+
+
+        const savedScreenshots = await Promise.all(
+            screenshots.map((screenshot) => {
+                screenshot.GameId = savedGame[0].id;
+                return dbWrapper.screenshots.findOrCreate(screenshot);
+            }));
+
+        const savedVideos = await Promise.all(
+            videos.map((video) => {
+                video.GameId = savedGame[0].id;
+                return dbWrapper.videos.findOrCreate(video);
+            }));
+
+        // console.log(savedGame);
+        savedGame[0].setPublishers(savedPublishers);
+        savedGame[0].setGenres(savedGenres);
+        savedGame[0].setGameModes(savedGameModes);
+        savedGame[0].setWebsites(savedWebsites);
+        savedGame[0].setPlatforms(savedPlatforms);
+
+        return savedGame[0];
     })).catch((err) => console.log(err));
 };
 

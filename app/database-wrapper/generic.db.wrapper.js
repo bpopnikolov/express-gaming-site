@@ -18,6 +18,10 @@ class GenericDbWrapper {
         return this.Model.create(obj);
     }
 
+    bulkCreate(arr) {
+        return this.Model.bulkCreate(arr);
+    }
+
     hasRecord(obj) {
         const filterObj = obj.name ? {
             name: obj.name,
@@ -36,10 +40,14 @@ class GenericDbWrapper {
         } : {
             url: obj.url,
         };
-        return this.Model.findCreateFind({
-            where: filterObj,
-            defaults: obj,
-        });
+
+        if (filterObj.name !== '' && filterObj.url !== '') {
+            return this.Model.findCreateFind({
+                where: filterObj,
+                defaults: obj,
+            });
+        }
+        return null;
     }
 }
 

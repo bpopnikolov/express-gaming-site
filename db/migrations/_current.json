@@ -35,10 +35,11 @@
                 },
                 "name": {
                     "allowNull": false,
+                    "unique": true,
                     "seqType": "Sequelize.STRING"
                 },
                 "summary": {
-                    "allowNull": false,
+                    "allowNull": true,
                     "seqType": "Sequelize.TEXT"
                 },
                 "rating": {
@@ -48,8 +49,12 @@
                     },
                     "seqType": "Sequelize.FLOAT"
                 },
+                "ratingCount": {
+                    "allowNull": true,
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "releaseDate": {
-                    "allowNull": false,
+                    "allowNull": true,
                     "validate": {
                         "isDate": true
                     },
@@ -57,9 +62,6 @@
                 },
                 "cover": {
                     "allowNull": false,
-                    "validate": {
-                        "isUrl": true
-                    },
                     "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {
@@ -88,20 +90,14 @@
                 },
                 "logo": {
                     "allowNull": false,
-                    "validate": {
-                        "isUrl": true
-                    },
                     "seqType": "Sequelize.STRING"
                 },
                 "description": {
-                    "allowNull": false,
+                    "allowNull": true,
                     "seqType": "Sequelize.TEXT"
                 },
                 "website": {
-                    "allowNull": false,
-                    "validate": {
-                        "isUrl": true
-                    },
+                    "allowNull": true,
                     "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {
@@ -154,9 +150,6 @@
                 },
                 "logo": {
                     "allowNull": false,
-                    "validate": {
-                        "isUrl": true
-                    },
                     "seqType": "Sequelize.STRING"
                 },
                 "description": {
@@ -164,10 +157,7 @@
                     "seqType": "Sequelize.TEXT"
                 },
                 "website": {
-                    "allowNull": false,
-                    "validate": {
-                        "isUrl": true
-                    },
+                    "allowNull": true,
                     "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {
@@ -405,9 +395,6 @@
                 },
                 "url": {
                     "allowNull": false,
-                    "validate": {
-                        "isUrl": true
-                    },
                     "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {
@@ -592,5 +579,5 @@
             "indexes": []
         }
     },
-    "revision": 6
+    "revision": 3
 }
