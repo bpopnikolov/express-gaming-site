@@ -1,6 +1,6 @@
 mixin nav()
     div.navbar-fixed
-        nav.main-nav
+        nav.main-nav.deep-purple.lighten-1
             div.nav-wrapper
                 a.brand-logo(href="/")
                     | Gameszila
@@ -39,15 +39,44 @@ mixin nav()
 
 
     ul#mobile-demo.side-nav
-        li
-            a(href="sass.html")
-                | Sass
-        li
-            a(href="badges.html")
-                | Components
-        li
-            a(href="collapsible.html")
-                | Javascript
-        li
-            a(href="mobile.html")
-                | Mobile
+      li.sidenav-header.deep-purple.lighten-1
+            if user
+              a.waves-effect.waves-deep-purple.center-align.white-text(href="#")
+               h5 #{user.firstname}
+            else 
+              a.waves-effect.waves-deep-purple.center-align.white-text(href="#")
+               h5 Gameszilla
+      li.white
+        ul.collapsible.collapsible-accordion
+          li
+            a.collapsible-header.center-align
+              | Games
+              i.material-icons.right(style='margin-right:0;') arrow_drop_down
+            .collapsible-body
+              ul
+                li
+                  a.waves-effect.waves-deep-purple(href='#')
+                    i.material-icons swap_horiz
+                    | Genres
+                    span.new.badge.right.yellow.grey.lighten-1(data-badge-caption='updated')
+                li
+                  a.waves-effect.waves-deep-purple(href='#')
+                    i.material-icons swap_horiz
+                    | Platforms
+                    span.new.badge.right.yellow.darken-3
+                li
+          .divider
+        if user
+            li
+                a.waves-effect.waves-deep-purple(href="/auth/logout")
+                    i.material-icons.mdi.mdi-logout
+                    | Log out
+        else
+            li
+                a.waves-effect.waves-deep-purple(href="/auth/login")
+                    i.material-icons.mdi.mdi-login
+                    | Log in
+            li
+                a.waves-effect.waves-deep-purple(href="/auth/register")
+                    i.material-icons.mdi.mdi-account-plus
+                    | Register
