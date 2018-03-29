@@ -18,7 +18,7 @@ const init = (app) => {
         // allows us to pass back the entire request to the callback
         passReqToCallback: true,
     }, async (req, email, password, done) => {
-        const user = await dbWrapper.users.getByEmail('');
+        const user = await dbWrapper.users.getByEmail(email);
 
         // console.log(user);
         if (!user) {

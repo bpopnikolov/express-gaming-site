@@ -1,45 +1,31 @@
 mixin nav()
-    // Dropdown Structure
-    ul#dropdown1.dropdown-content
-        li
-            a(href="#!")
-                | Genres
-        li.divider
-        li
-            a(href="#!")
-                | Platforms
-
-    //- // Side Nav Structure
-    //- ul#mobile-demo.sidenav
-    //-     li
-    //-         a(href="sass.html")
-    //-             | Sass
-    //-     li
-    //-         a(href="badges.html")
-    //-             | Components
-    //-     li
-    //-         a(href="collapsible.html")
-    //-             | Javascript
-    //-     li
-    //-         a(href="mobile.html")
-    //-             | Mobile
-
     div.navbar-fixed
         nav.main-nav
             div.nav-wrapper
                 a.brand-logo(href="/")
-                    | favicon
-                //- a.sidenav-trigger(href="#", data-target="mobile-demo")
-                //-     i.material-icons
-                //-         | menu
+                    | Gameszila
+                a.button-collapse.hide-on-large(href='#', data-activates='mobile-demo')
+                    i.material-icons menu
                 ul.right.hide-on-med-and-down
-                    li
-                        a.dropdown-button(href="#", data-activates="dropdown1")
-                            | Games
-                            i.material-icons.right
-                                | arrow_drop_down
                     if user
-                        =user.username
+                        li
+                            a(href="/user/profile")
+                                | Hello, #{user.firstname}
+                    li
+                        a.dropdown-button(href="#", data-activates="gamesDropdown")
+                            | Games 
+                            i.material-icons.right
+                                | arrow_drop_down 
+                            // Dropdown Structure
+                        ul#gamesDropdown.dropdown-content
+                            li
+                                a(href="#!")
+                                    | Genres
+                            li.divider
+                            li
+                                a(href="#!")
+                                    | Platforms
+                    if user
                         li
                             a(href="/auth/logout")
                                 | Log out
@@ -50,3 +36,18 @@ mixin nav()
                         li
                             a(href="/auth/register")
                                 | Register
+
+
+    ul#mobile-demo.side-nav
+        li
+            a(href="sass.html")
+                | Sass
+        li
+            a(href="badges.html")
+                | Components
+        li
+            a(href="collapsible.html")
+                | Javascript
+        li
+            a(href="mobile.html")
+                | Mobile
