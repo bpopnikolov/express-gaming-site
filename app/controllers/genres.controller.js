@@ -5,7 +5,6 @@ const getAll = async (req, res, next) => {
     return dbWrapper.genres.getAll();
 };
 
-<<<<<<< HEAD
 const apiGetGamesByCategory = async (req, res, next) => {
     const genreNameStr = req.params.genreName;
     const genreObj = await dbWrapper.genres.hasRecord(genreNameStr);
@@ -31,8 +30,6 @@ const getGamesByCategory = async (req, res, next) => {
     res.render('genres/gamesFromGenre', context);
 };
 
-=======
->>>>>>> 6e18fff1bf8dbe8c871be47e71ed614458943136
 module.exports = {
     getAll,
     apiGetGamesByCategory,

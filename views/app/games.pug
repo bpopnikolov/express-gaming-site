@@ -16,12 +16,12 @@ block content
                 div.row
                     br
                     br
-                    img.game-cover.col.m6.s12(src="https://images.igdb.com/igdb/image/upload/t_screenshot_big/y5sazxz3klikoqxrxyje.jpg")
+                    img.game-cover.col.m6.s12(src=gameObj.cover)
                     h1.header.teal-text.text-lighten-2.col.s12.m6.left-align
-                        | Game name
+                        | #{gameObj.name}
                     div.center
                         h5.header.col.s12.m6.light.left-align
-                            | Release date: 01/01/2019
+                            | Release date: #{gameObj.releaseDate}
                     div.center
                         h5.header.col.s12.m6.light.left-align
                             a(href='#')
@@ -33,7 +33,7 @@ block content
                     br
                     br
         div.parallax
-            img(src='https://images.igdb.com/igdb/image/upload/t_screenshot_big/y5sazxz3klikoqxrxyje.jpg')
+            img(src=gameObj.cover)
     div.container
         div.section
             div.row
