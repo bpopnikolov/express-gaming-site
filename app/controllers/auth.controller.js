@@ -3,7 +3,6 @@ const errorsConfig = require('../config/errors.config');
 const dbWrapper = require('../database-wrapper');
 
 const login = (req, res, next) => {
-
     passport.authenticate('local', (err, user, authError) => {
         if (err) {
             console.log(err);
