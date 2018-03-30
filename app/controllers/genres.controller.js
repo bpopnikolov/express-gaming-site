@@ -12,10 +12,32 @@ const apiGetGamesByCategory = async (req, res, next) => {
         res.render('app/pageNotFound');
     }
     const gamesObjsFromCateg = await dbWrapper.genres.getGames(genreObj);
-    gamesObjsFromCateg.forEach((game) => console.log(game.name));
+
+    const games = [];
+
+    gamesObjsFromCateg.forEach( (gameObj, index) => {
+        const curGame = {};
+        curGame.name = gameObj.name;
+        curGame.summary = gameObj.summary;
+        curGame.rating = gameObj.rating;
+        curGame.ratingCount = gameObj.ratingCount;
+        curGame.releaseDate = gameObj.releaseDate;
+        curGame.coverUrl = gameObj.cover;
+
+        // const gameGenres = await gameObj.getGenres();
+        // curGame.gameGenres = gameGenres.map((gameGenre) => gameGenre.name);
+
+        const screenShots = gameObj.Screenshots;
+        curGame.screenshotsUrls = screenShots.map((screenshot) => screenshot.url);
+        games.push(curGame);
+        // console.log(games);
+        // console.log(curGame);
+    });
+
+    console.log(games);
 
     const context = {};
-    context.gamesObjs = gamesObjsFromCateg;
+    context.gamesObjs = games;
     res.send(context);
 };
 

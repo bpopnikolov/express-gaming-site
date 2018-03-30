@@ -52,8 +52,11 @@ class gamesDbWrapper extends genericDbWrapper {
         });
     }
 
-    // async getGameRelatedProperties(gameId, Model) {
-        
-    // }
+    async getScreenshots(gameObj) {
+        return gameObj.getScreenshots();
+    }
+    async getVideos(gameObj) {
+        return gameObj.getVideos();
+    }
 }
 module.exports = gamesDbWrapper;

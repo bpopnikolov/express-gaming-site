@@ -10,7 +10,7 @@ const init = (app, dbWrapper) => {
     router
         .get('/:genreName', genresController.apiGetGamesByCategory);
 
-    app.use('api/genres', router);
+    app.use('/api/genres', router);
 };
 
 module.exports = {
