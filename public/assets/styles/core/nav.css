@@ -1,0 +1,27 @@
+.dropdown-nested {
+    overflow-y: visible;
+}
+
+.dropdown-content .dropdown-content {
+    margin-left: 100%;
+}
+
+#platformsDropdown {
+    overflow-y: auto;
+}
+
+.logo-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
+}
+
+.logo {
+    flex: 1 1 100%;
+    font-size: 2.1em;
+}
+
+.user-info {
+    flex: 1 1 100%;
+    margin-right: 20px;
+}

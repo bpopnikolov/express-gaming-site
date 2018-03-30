@@ -1,0 +1,17 @@
+@import url('./materialdesignicons.min.css');
+@import url('./core/nav.css');
+@import url('./core/side-nav.css');
+
+body {
+    font-size: 16px;
+}
+
+.tabs .tab a:hover,
+.tabs .tab a.active,
+    {
+    color: #673ab7 !important;
+}
+
+.indicator {
+    background-color: #673ab7 !important;
+}
