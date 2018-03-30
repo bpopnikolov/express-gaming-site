@@ -1,7 +1,8 @@
 const parseGame = (obj) => {
     let coverUrl = '';
     if (obj.cover) {
-        coverUrl = `http:${obj.cover.url}`;
+        const cover = obj.cover.url.replace('t_thumb', 't_cover_big');
+        coverUrl = `http:${cover}`;
     }
     return {
         name: obj.name,
@@ -62,7 +63,8 @@ const parsePlatform = (obj) => {
 const parseScreenshot = (obj) => {
     let url = '';
     if (obj.url) {
-        url = `http:${obj.url}`;
+        const original= obj.url.replace('t_thumb', 't_original');
+        url = `http:${original}`;
     }
     return {
         url: url,
