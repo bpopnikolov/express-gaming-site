@@ -24,8 +24,14 @@ block content
                             | Release date: #{gameObj.releaseDate}
                     div.center
                         h5.header.col.s12.m6.light.left-align
-                            a(href='#')
-                                | Publishers
+                            p.publisher
+                                | Publisher: 
+                                each publisher, index in gameObj.Publishers
+                                    a(href="#")
+                                        | #{publisher.name}
+                                    if index < gameObj.Publishers.length - 1
+                                        span
+                                            | , 
                     div.center
                         h5.header.col.s12.m6.light.left-align
                             a(href='#')
@@ -41,20 +47,30 @@ block content
                     div.icon-block
                         h5.center
                             | About
-                        p.light
-                            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto iste dolorem eius laboriosam alias unde sed, quis accusamus aliquid animi laborum ad doloribus magni. Asperiores numquam rerum illo ab quasi?
                         p.genre
-                            a(href="#")
-                                | Genres
+                            | Genre: 
+                            each genre, index in gameObj.Genres
+                                a(href="#")
+                                    | #{genre.name}
+                                if index < gameObj.Genres.length - 1
+                                    span
+                                        | , 
                         p.platform
-                            a(href="#")
-                                | Platforms
-                        p.edikakvosi
-                            a(href="#")
-                                | this section could be split into 2 x 4
-                        p.etc
-                            a(href="#")
-                                | And so on...
+                            | Platforms:
+                            each platform, index in gameObj.Platforms
+                                a(href="#")
+                                    | #{platform.name}
+                                if index < gameObj.Platforms.length - 1
+                                    span
+                                        | , 
+                        p.light
+                            | #{gameObj.summary}
+                        //- p.edikakvosi
+                        //-     a(href="#")
+                        //-         | this section could be split into 2 x 4
+                        //- p.etc
+                        //-     a(href="#")
+                        //-         | And so on...
                 form(action="/:name", method="post")
                     div.col.s12.m4
                         h5.center
@@ -73,31 +89,44 @@ block content
                             a#rate10.small.material-icons.mdi.mdi-star-outline(href="#", data-rating=10)
                             a#rate11.small.material-icons.mdi.mdi-star-outline.hide(href="#")
                         div.view-rating.center-align
+    //- div.wr-slider
+    //-     div.slider-games
+    //-         div.game-box
+    //-             img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
+    //-             div.game-title
+    //-                 | League of Legends1
+    //-         div.game-box
+    //-             img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
+    //-             div.game-title
+    //-                 | League of Legends2
+    //-         div.game-box
+    //-             img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
+    //-             div.game-title
+    //-                 | League of Legends3
+    //-         div.game-box
+    //-             img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
+    //-             div.game-title
+    //-                 | League of Legends4
+    //-         div.game-box
+    //-             img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
+    //-             div.game-title
+    //-                 | League of Legends5
     div.wr-slider
         div.slider-games
-            div.game-box
-                img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
-                div.game-title
-                    | League of Legends1
-            div.game-box
-                img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
-                div.game-title
-                    | League of Legends2
-            div.game-box
-                img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
-                div.game-title
-                    | League of Legends3
-            div.game-box
-                img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
-                div.game-title
-                    | League of Legends4
-            div.game-box
-                img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
-                div.game-title
-                    | League of Legends5
-    div.container
+            each screenShot in gameObj.Screenshots
+                div.game-box
+                    img(src=screenShot.url).game-pic.materialboxed
+                    //- | #{screenShot.url}
+            each video in gameObj.Videos
+                div.game-box
+                    - var embededUrl = video.url.replace('watch?v=', 'embed/');
+                    iframe(src=embededUrl).game-pic
+                    //- img(src=video.url).game-pic
+                    //- | #{embededUrl}
+    div.container.z-depth-1
         .col.s12
-            h4.header Reviews
+            h4.header 
+                | Reviews
                 .card.horizontal
                     .card-stacked
                         .card-content

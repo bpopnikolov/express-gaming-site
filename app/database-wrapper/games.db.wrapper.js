@@ -2,12 +2,16 @@ const genericDbWrapper = require('./generic.db.wrapper');
 
 const {
     Game,
-    GameModes,
+    Genre,
+    Platform,
+    Publisher,
+    Screenshot,
+    Video,
 } = require('../../db/models');
 
 class gamesDbWrapper extends genericDbWrapper {
     constructor() {
-        super(Game, []);
+        super(Game, [Genre, Platform, Publisher, Screenshot, Video]);
     }
 
     async setGameModes(gameObj, gameModes) {
@@ -39,15 +43,17 @@ class gamesDbWrapper extends genericDbWrapper {
     }
 
     async getByName(nameInput) {
+        // console.log(this.includes);
         return this.Model.findOne({
             where: {
                 name: nameInput,
             },
+            include: this.includes,
         });
     }
 
-    async getGameRelatedProperties(gameId, Model) {
+    // async getGameRelatedProperties(gameId, Model) {
         
-    }
+    // }
 }
 module.exports = gamesDbWrapper;
