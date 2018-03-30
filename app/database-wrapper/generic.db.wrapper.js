@@ -22,17 +22,6 @@ class GenericDbWrapper {
         return this.Model.bulkCreate(arr);
     }
 
-    hasRecord(obj) {
-        const filterObj = obj.name ? {
-            name: obj.name,
-        } : {
-            url: obj.url,
-        };
-
-        return this.Model.findOne({
-            where: filterObj,
-        });
-    }
 
     findOrCreate(obj) {
         const filterObj = obj.name ? {

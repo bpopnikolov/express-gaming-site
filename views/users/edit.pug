@@ -1,0 +1,24 @@
+extends ../shared/master
+
+block append head
+    link(rel="stylesheet", type="text/css", href='/public/assets/styles/users/profile.css')
+
+block append scripts
+    //- script(src="/public/assets/js/core/games/gamejs.js")
+
+block content
+  .container.user-profile
+    .row
+      .col.s12
+        ul.tabs
+          li.tab.col.s6
+            a.active.waves-effect.waves-purple.deep-purple-text(href='#profile') Profile
+          li.tab.col.s6
+            a.waves-effect.waves-purple.deep-purple-text(href='#test1') Change Password
+
+      #profile.col.s12 Profile
+      #test1.col.s12 Change Password
+
+
+
+
