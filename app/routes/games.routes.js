@@ -6,6 +6,14 @@ const game = {
     name: 'test123',
 };
 
+// async getByName(nameInput) {
+//     return this.Model.findOne({
+//         where: {
+//             name: nameInput,
+//         },
+//     });
+// }
+
 const init = (app, dbWrapper) => {
     const router = new Router();
 
@@ -14,7 +22,7 @@ const init = (app, dbWrapper) => {
             res.render('app/games');
         });
 
-    app.use('/', router);
+    app.use('/games', router);
 };
 
 module.exports = {
