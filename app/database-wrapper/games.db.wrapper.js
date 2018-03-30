@@ -36,5 +36,11 @@ class gamesDbWrapper extends genericDbWrapper {
     async setWebsites(gameObj, websites) {
         return gameObj.setWebsites(websites);
     }
+    async getScreenshots(gameObj) {
+        return gameObj.getScreenshots();
+    }
+    async getVideos(gameObj) {
+        return gameObj.getVideos();
+    }
 }
 module.exports = gamesDbWrapper;

@@ -2,6 +2,7 @@ const genericDbWrapper = require('./generic.db.wrapper');
 
 const {
     Genre,
+    Screenshot,
 } = require('../../db/models');
 
 class genreDbWrapper extends genericDbWrapper {
@@ -18,8 +19,9 @@ class genreDbWrapper extends genericDbWrapper {
     }
 
     async getGames(genreObj) {
-        return genreObj.getGames();
+        return genreObj.getGames({
+            include: [Screenshot],
+        });
     }
 }
 module.exports = genreDbWrapper;
-
