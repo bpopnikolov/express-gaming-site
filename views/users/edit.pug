@@ -9,32 +9,47 @@ block append scripts
 block content
   .container.user-profile
     .row
-      .col.s6.offset-s3.tabs-container
+      .col.s12.m10.offset-m1.xl6.offset-xl3.tabs-container
         .card-panel
           .row
             ul.tabs
               li.tab.col.s6
-                a.active.waves-effect.waves-purple.deep-purple-text(href='#preview') Preview
+                a.active.waves-effect.waves-purple.deep-purple-text(href='#previewProfile') Preview
               li.tab.col.s6
-                a.waves-effect.waves-purple.deep-purple-text(href='#changePassword') Edit
+                a.waves-effect.waves-purple.deep-purple-text(href='#editProfile') Edit
 
-            #preview.col.s12
+            #previewProfile.col.s12
                 .profile-container
-                  .avatar
-                    img(src="/public/assets/img/", alt="")
-            #changePassword.col.s12
-              form.col.s12
+                  .col.s10.offset-s1.m6.avatar-container.center-align
+                    .avatar
+                      img(src=user.avatar, alt="")
+                  .col.s12.m6.user-desc
+                    .firstname.user-profile-info
+                      span
+                        |Firstanme:
+                      | #{user.firstname}
+                    .lastname.user-profile-info
+                      span
+                        |Lastname:
+                      | #{user.lastname}
+                    .email.user-profile-info
+                      span
+                        |email:
+                      | #{user.email}
+
+            #editProfile.col.s12
+              form.col.s12.edit-profile-form
                   .row
                     .input-field.col.s8.offset-s2
-                      input#first_name.validate(placeholder='Placeholder', type='text')
+                      input#first_name.validate(type='text', value=user.firstname, disabled='true')
                       label(for='first_name') First Name
                   .row
                     .input-field.col.s8.offset-s2
-                      input#last_name.validate(type='text')
+                      input#last_name.validate(type='text', value=user.lastname, disabled='true')
                       label(for='last_name') Last Name
                   .row
                     .input-field.col.s8.offset-s2
-                      input#email.validate(type='email')
+                      input#email.validate(type='email', value=user.email)
                       label(for='email') Email
                   .row
                     .input-field.col.s8.offset-s2
@@ -42,10 +57,14 @@ block content
                       label(for='password') Password
                   .row
                     .file-field.input-field.col.s8.offset-s2
-                     .btn
-                       span File
-                       input(type='file')
+                     button.btn
+                       |File
+                       input#avatar(type='file')
                      .file-path-wrapper
                        input.file-path.validate(type='text', placeholder='Upload avatar')
+                  .row
+                    .col.s2.offset-s8
+                      button.btn.waves-effect.waves-light(type='submit')
+                        | Save
 
 

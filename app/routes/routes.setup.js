@@ -14,6 +14,12 @@ const init = (app, dbWrapper) => {
             const route = require(modulePath);
             route.init(app, dbWrapper);
         });
+
+
+    app.use(function(req, res, next) {
+        res.status(404).render('app/pageNotFound.pug',
+            res.locals);
+    });
 };
 
 module.exports = {

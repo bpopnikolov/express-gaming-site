@@ -25,6 +25,11 @@ module.exports = (sequelize, DataTypes) => {
             },
             unique: true,
         },
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+        },
         password: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -36,6 +41,8 @@ module.exports = (sequelize, DataTypes) => {
     }, {});
 
     User.hook('beforeValidate', async (user, option) => {
+        user.username = user.email.substring(0, user.email.lastIndexOf('@'));
+
         if (!user.avatar) {
             user.avatar = '/public/assets/img/no_user_avatar.png';
         }
@@ -54,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
         return user;
     });
 
-    User.prototype.comparePassword = async function (passwordAttempt) {
+    User.prototype.comparePassword = async function(passwordAttempt) {
         const user = this;
 
         const isMatch = bcrypt.compare(passwordAttempt, user.password);

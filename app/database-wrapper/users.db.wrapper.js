@@ -19,6 +19,15 @@ class usersDbWrapper extends genericDbWrapper {
         return user;
     }
 
+    async getByUsername(username) {
+        const user = User.findOne({
+            where: {
+                username: username,
+            },
+        });
+
+        return user;
+    }
 
     async findOrCreate(user) {
         const savedUser = await this.Model.findCreateFind({

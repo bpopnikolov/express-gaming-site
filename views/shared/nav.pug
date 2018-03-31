@@ -4,8 +4,11 @@ mixin nav()
             div.nav-wrapper
                 .logo-wrapper.right
                     .user-info
-                        if user
-                            a(href="/user/profile")
+                      if user
+                        div
+                            img.circle.responsive-img.valign.profile-image(src=user.avatar, width='38px', height='38px', alt='')
+                        div
+                            a#profileDropdownTrigger.dropdown-trigger.waves-effect.waves-purple(href="#", data-target="profileDropdown")
                                 | Hello, #{user.firstname}
                     .logo
                         a(href="/")
@@ -74,9 +77,13 @@ mixin nav()
                     | Register
     ul#gamesDropdown.dropdown-content
         li
-            a(href="#")
+            a.waves-effect.waves-purple(href="#")
                 | Genres
         li.divider
         li
-            a(href="#")
+            a.waves-effect.waves-purple(href="#")
                 | Platforms
+    ul#profileDropdown.dropdown-content
+        li
+            a.waves-effect.waves-purple(href="/users/profile/edit")
+                | Profile

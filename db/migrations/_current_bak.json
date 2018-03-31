@@ -326,11 +326,6 @@
                     "unique": true,
                     "seqType": "Sequelize.STRING"
                 },
-                "username": {
-                    "allowNull": false,
-                    "unique": true,
-                    "seqType": "Sequelize.STRING"
-                },
                 "password": {
                     "allowNull": false,
                     "seqType": "Sequelize.STRING"
@@ -584,5 +579,5 @@
             "indexes": []
         }
     },
-    "revision": 4
+    "revision": 3
 }
