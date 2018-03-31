@@ -29,7 +29,17 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        avatar: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
     }, {});
+
+    User.hook('beforeValidate', async (user, option) => {
+        if (!user.avatar) {
+            user.avatar = '/public/assets/img/no_user_avatar.png';
+        }
+    });
 
     User.hook('beforeSave', async (user, option) => {
         const SALT_FACTOR = 5;
@@ -44,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
         return user;
     });
 
-    User.prototype.comparePassword = async function(passwordAttempt) {
+    User.prototype.comparePassword = async function (passwordAttempt) {
         const user = this;
 
         const isMatch = bcrypt.compare(passwordAttempt, user.password);

@@ -1,6 +1,5 @@
 const dbWrapper = require('../database-wrapper');
 
-
 const getAll = async (req, res, next) => {
     return dbWrapper.genres.getAll();
 };
@@ -11,11 +10,14 @@ const apiGetGamesByCategory = async (req, res, next) => {
     if (!genreObj) {
         res.render('app/pageNotFound');
     }
-    const gamesObjsFromCateg = await dbWrapper.genres.getGames(genreObj);
 
+    const context = {};
+    context.genre = genreNameStr;
+
+    const gamesObjsFromCateg = await dbWrapper.genres.getGames(genreObj);
     const games = [];
 
-    gamesObjsFromCateg.forEach( (gameObj, index) => {
+    gamesObjsFromCateg.forEach((gameObj, index) => {
         const curGame = {};
         curGame.name = gameObj.name;
         curGame.summary = gameObj.summary;
@@ -24,20 +26,32 @@ const apiGetGamesByCategory = async (req, res, next) => {
         curGame.releaseDate = gameObj.releaseDate;
         curGame.coverUrl = gameObj.cover;
 
-        // const gameGenres = await gameObj.getGenres();
-        // curGame.gameGenres = gameGenres.map((gameGenre) => gameGenre.name);
+        curGame.gameModes = gameObj.GameModes
+            .map((gameMode) => gameMode.name);
 
-        const screenShots = gameObj.Screenshots;
-        curGame.screenshotsUrls = screenShots.map((screenshot) => screenshot.url);
+        curGame.genres = gameObj.Genres
+            .map((genre) => genre.name);
+
+        curGame.platfroms = gameObj.Platforms
+            .map((platform) => platform.name);
+
+        curGame.publishers = gameObj.Publishers
+            .map((publisher) => publisher.name);
+
+        curGame.screenshots = gameObj.Screenshots
+            .map((screeshot) => screeshot.url);
+
+        curGame.videos = gameObj.Videos
+            .map((video) => video.url);
+
+        curGame.websites = gameObj.Websites
+            .map((website) => website.url);
+
         games.push(curGame);
-        // console.log(games);
-        // console.log(curGame);
     });
 
-    console.log(games);
-
-    const context = {};
     context.gamesObjs = games;
+    console.log(context);
     res.send(context);
 };
 
