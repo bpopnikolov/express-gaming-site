@@ -1,8 +1,13 @@
 const genericDbWrapper = require('./generic.db.wrapper');
 
 const {
+    GameMode,
     Genre,
+    Platform,
+    Publisher,
     Screenshot,
+    Video,
+    Website,
 } = require('../../db/models');
 
 class genreDbWrapper extends genericDbWrapper {
@@ -20,7 +25,32 @@ class genreDbWrapper extends genericDbWrapper {
 
     async getGames(genreObj) {
         return genreObj.getGames({
-            include: [Screenshot],
+            include: [
+                GameMode,
+                Genre,
+                Platform,
+                Publisher,
+                Screenshot,
+                Video,
+                Website,
+            ],
+        });
+    }
+
+    async getGamesInRange(genreObj, limit, offset) {
+        return genreObj.getGames({
+            limit: limit,
+            offset: offset,
+
+            include: [
+                GameMode,
+                Genre,
+                Platform,
+                Publisher,
+                Screenshot,
+                Video,
+                Website,
+            ],
         });
     }
 }

@@ -1,0 +1,16 @@
+.category-text{
+    color:#26a69a;
+    font-weight: bold;
+}
+
+.game-wrapper{
+    display: inline-block;
+    background-color: red;
+    overflow: hidden;
+    margin: 20px;
+}
+
+.game-pic{
+    width: 220px;
+    height: 300px;
+}
