@@ -7,7 +7,6 @@ const {
     Publisher,
     Screenshot,
     Video,
-    UserGameRating,
 } = require('../../db/models');
 
 class gamesDbWrapper extends genericDbWrapper {
