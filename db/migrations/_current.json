@@ -90,18 +90,6 @@
                     "unique": true,
                     "seqType": "Sequelize.STRING"
                 },
-                "logo": {
-                    "allowNull": false,
-                    "seqType": "Sequelize.STRING"
-                },
-                "description": {
-                    "allowNull": true,
-                    "seqType": "Sequelize.TEXT"
-                },
-                "website": {
-                    "allowNull": true,
-                    "seqType": "Sequelize.STRING"
-                },
                 "createdAt": {
                     "allowNull": false,
                     "seqType": "Sequelize.DATE"
@@ -339,6 +327,10 @@
                     "seqType": "Sequelize.STRING"
                 },
                 "password": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.STRING"
+                },
+                "avatar": {
                     "allowNull": false,
                     "seqType": "Sequelize.STRING"
                 },

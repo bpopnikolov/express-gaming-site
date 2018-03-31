@@ -7,25 +7,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
     },
-    logo: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.TEXT(),
-      allowNull: true,
-    },
-    website: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
 
   }, {});
-  Genre.hook('beforeValidate', (genre, options) => {
-    if (!genre.logo) {
-      genre.logo = '/public/assets/img/noImg.jpg';
-    }
-  });
+
   Genre.associate = (models) => {
     // associations can be defined here
   };
