@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     $(".parallax").parallax();
     $(".materialboxed").materialbox();
 
@@ -21,15 +21,28 @@ $(function() {
 
     // rating stars effect on hover
     $(".mdi-star-outline").hover(
-        function() {
+        function () {
             var anchorNextToHoveredStar = $(this).next();
             var firstHiddenAnchor = $("#rate0");
+            var clickedStar = $(".clicked");
+            var anchorNextToClickedStar = clickedStar.next();
 
             // replace icons of all rating stars before and including hovered
-            $(firstHiddenAnchor)
-                .nextUntil(anchorNextToHoveredStar)
-                .removeClass("mdi-star-outline")
-                .addClass("mdi-star");
+            if (clickedStar.length === 0) {
+                $(firstHiddenAnchor)
+                    .nextUntil(anchorNextToHoveredStar)
+                    .removeClass("mdi-star-outline")
+                    .addClass("mdi-star");
+            } else {
+                $(firstHiddenAnchor)
+                    .nextUntil(anchorNextToClickedStar)
+                    .removeClass("mdi-star")
+                    .addClass("mdi-star-outline");
+                $(firstHiddenAnchor)
+                    .nextUntil(anchorNextToHoveredStar)
+                    .removeClass("mdi-star-outline")
+                    .addClass("mdi-star");
+            }
 
             // visualize rating x/10
             $(".view-rating")
@@ -37,42 +50,49 @@ $(function() {
         },
 
         // same but when leaving hover
-        function() {
+        function () {
             var anchorNextToHoveredStar = $(this).next();
             var firstHiddenAnchor = $("#rate0");
-
-            $(firstHiddenAnchor).nextUntil(anchorNextToHoveredStar)
-                .removeClass("mdi-star")
-                .addClass(" mdi-star-outline ");
-
-            $(".view-rating")
-                .html("");
+            var clickedStar = $(".clicked");
+            var anchorNextToClickedStar = clickedStar.next();
+            var ratingToDisplay = clickedStar.attr("data-rating");
+            if (clickedStar.length === 1) {
+                $(clickedStar)
+                    .nextUntil(anchorNextToHoveredStar)
+                    .removeClass("mdi-star")
+                    .addClass(" mdi-star-outline ");
+                $(firstHiddenAnchor)
+                    .nextUntil(anchorNextToClickedStar)
+                    .removeClass("mdi-star-outline")
+                    .addClass("mdi-star");
+                $(".view-rating")
+                    .html(ratingToDisplay + "/10");
+            } else {
+                $(firstHiddenAnchor)
+                    .nextUntil(anchorNextToHoveredStar)
+                    .removeClass("mdi-star")
+                    .addClass(" mdi-star-outline ");
+                $(".view-rating")
+                    .html("");
+            }
         });
-
-    // // textarea
-    // $("#textarea1").val("");
-    // M.textareaAutoResize($("#textarea1"));
 });
 
-$(document).on("click", ".rate", function() {
+$(document).on("click", ".rate", function () {
+    console.log(location.pathname);
+    var firstHiddenStar = $("#rate0");
+    var lastHiddenStar = $("#rate11");
+    var clickedStar = $(this);
+    var starNextToClicked = $(this).next();
     var ratingValue = +($(this).attr("data-rating"));
-    var gameId = +($("#rate0").text());
-    // var userId = 
-    // console.log(gameId);
-    // console.log(ratingValue);
-    // console.log(typeof(ratingValue));
-    // var xhttp = new XMLHttpRequest();
-    // xhttp.open("POST", "http://localhost:3001/games/", true);
 
     var objectToBeSent = {
         rating: ratingValue,
-        gameId: 49,
-        userId: 1,
+        GameId: 49,
+        UserId: 1
     };
-
     var jsonObj = JSON.stringify(objectToBeSent);
-    var url = "games/" + gameId;
-    console.log(url);
+    var url = "/games/" + objectToBeSent.GameId;
 
     $.ajax({
         type: "POST",
@@ -80,7 +100,15 @@ $(document).on("click", ".rate", function() {
         data: jsonObj,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function () {
+        success: function (data) {
+            $(firstHiddenStar).nextUntil(lastHiddenStar)
+                .removeClass("mdi-star")
+                .removeClass("clicked")
+                .addClass("mdi-star-outline");
+            $(clickedStar).addClass("clicked");
+            $(firstHiddenStar).nextUntil(starNextToClicked)
+                .removeClass("mdi-star-outline")
+                .addClass("mdi-star");
             alert("Success");
         },
         error: function () {

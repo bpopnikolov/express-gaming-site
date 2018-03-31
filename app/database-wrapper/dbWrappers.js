@@ -7,6 +7,7 @@ const ScreenshotsDbWrapper = require('./screenshots.db.wrapper');
 const VideosDbWrapper = require('./videos.db.wrapper');
 const WebsitesDbWrapper = require('./websites.db.wrapper');
 const UsersDbWrapper = require('./users.db.wrapper');
+const RatingsDbWrapper = require('./ratings.db.wrapper');
 
 module.exports = {
     gameModes: new GameModesDbWrapper(),
@@ -18,4 +19,5 @@ module.exports = {
     videos: new VideosDbWrapper(),
     websites: new WebsitesDbWrapper(),
     users: new UsersDbWrapper(),
+    ratings: new RatingsDbWrapper(),
 };
