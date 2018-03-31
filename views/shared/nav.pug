@@ -1,6 +1,6 @@
 mixin nav()
     div.navbar-fixed
-        nav.main-nav.deep-purple.lighten-1
+        nav.deep-purple.lighten-1
             div.nav-wrapper
                 .logo-wrapper.right
                     .user-info
@@ -11,14 +11,14 @@ mixin nav()
                         a(href="/")
                             | Gameszilla
 
-                a.button-collapse.hide-on-large(href='#', data-activates='mobile-demo')
+                a.sidenav-trigger.hide-on-large(href='#', data-target='slide-out')
                     i.material-icons menu
                 ul.left.hide-on-med-and-down
                     li
                         a.waves-effect.waves-purple(href='/')
                             | Home
                     li
-                        a#gamesDropdownTrigger.dropdown-button.waves-effect.waves-purple(href="#", data-activates="gamesDropdown")
+                        a#gamesDropdownTrigger.dropdown-trigger.waves-effect.waves-purple(href="#", data-target="gamesDropdown")
                             | Games 
                             i.material-icons.right
                                 | arrow_drop_down 
@@ -35,16 +35,16 @@ mixin nav()
                                 | Register
 
 
-    ul#mobile-demo.side-nav
+    ul#slide-out.sidenav
       li.sidenav-header.deep-purple.lighten-1
             if user
               a.waves-effect.waves-purple.center-align.white-text(href="#")
                h5 #{user.firstname}
             else 
-              a.waves-effect.waves-purple.center-align.white-text(href="#")
+              a.waves-effect.waves-purple.center-align.white-text(href="/")
                h5 Gameszilla
       li.white
-        ul.collapsible.collapsible-accordion
+        ul.collapsible
           li
             a.collapsible-header.waves-effect.waves-purple.center-align
               | Games
@@ -52,40 +52,11 @@ mixin nav()
             .collapsible-body
               ul
                 li
-                    ul.collapsible.collapsible-accordion
-                      li
-                        a.collapsible-header.waves-effect.waves-purple.center-align
+                    a.waves-effect.waves-purple.center-align
                           | Genres
-                          i.material-icons.right(style='margin-right:0;') arrow_drop_down
-                        .collapsible-body
-                          ul
-                            if genres.length > 0
-                                li
-                                  each genre in genres
-                                    a.waves-effect.waves-purple(href='#')
-                                        | #{genre.name}
-                            else
-                                li
-                                    a.waves-effect.waves-purple(href='#')
-                                        | 
-                            li.divider
                 li
-                    ul.collapsible.collapsible-accordion
-                      li
-                        a.collapsible-header.waves-effect.waves-purple.center-align
+                    a.waves-effect.waves-purple.center-align
                           | Platforms
-                          i.material-icons.right(style='margin-right:0;') arrow_drop_down
-                        .collapsible-body
-                          ul
-                            if platforms.length > 0
-                                li
-                                  each platform in platforms
-                                    a.waves-effect.waves-purple(href='#')
-                                        | #{platform.name}
-                            else
-                                li
-                                    a.waves-effect.waves-purple(href='#')
-                                        | 
           .divider
         if user
             li
@@ -101,40 +72,11 @@ mixin nav()
                 a.waves-effect.waves-purple(href="/auth/register")
                     i.material-icons.mdi.mdi-account-plus
                     | Register
-    ul#gamesDropdown.dropdown-content.dropdown-nested
+    ul#gamesDropdown.dropdown-content
         li
-            a#genresDropdownTrigger.dropdown-button(href="#" data-activates="genresDropdown")
+            a(href="#")
                 | Genres
-                i.material-icons.right
-                    | arrow_drop_down
         li.divider
         li
-            a#platformsDropdownTrigger.dropdown-button(href="#" data-activates="platformsDropdown")
+            a(href="#")
                 | Platforms
-                i.material-icons.right
-                    | arrow_drop_down
-
-        ul#genresDropdown.dropdown-content.dropdown-nested
-            if genres.length > 0
-                each genre in genres
-                    li
-                     a.dropdown-button(href="#")
-                        | #{genre.name}
-                    li.divider
-            else 
-                    li
-                     a.dropdown-button(href="#")
-                        | 
-                    li.divider
-        ul#platformsDropdown.dropdown-content.dropdown-nested
-            if platforms.length > 0
-                each platform in platforms
-                    li
-                     a.dropdown-button(href="#")
-                        | #{platform.name}
-                    li.divider
-            else 
-                    li
-                     a.dropdown-button(href="#")
-                        | 
-                    li.divider

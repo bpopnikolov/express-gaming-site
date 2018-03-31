@@ -1,11 +1,11 @@
-$(function () {
+$(function() {
     $(".parallax").parallax();
 
     // parallax init
 
     // rating stars effect on hover
-    $(" .mdi-star-outline ").hover(
-        function () {
+    $(".mdi-star-outline").hover(
+        function() {
             var anchorNextToHoveredStar = $(this).next();
             var firstHiddenAnchor = $("#rate0");
 
@@ -21,7 +21,7 @@ $(function () {
         },
 
         // same but when leaving hover
-        function () {
+        function() {
             var anchorNextToHoveredStar = $(this).next();
             var firstHiddenAnchor = $("#rate0");
 

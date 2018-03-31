@@ -13,7 +13,7 @@ const {
 class gamesDbWrapper extends genericDbWrapper {
     constructor() {
         super(Game, [Genre, Platform, Publisher, Screenshot,
-                    Video, UserGameRating]);
+                    Video]);
     }
 
     async setGameModes(gameObj, gameModes) {
