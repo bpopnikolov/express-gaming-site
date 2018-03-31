@@ -1,7 +1,20 @@
-class UsersController {
-    constructor(dbWrapper) {
-        this.dbWrapper = dbWrapper;
-    }
-}
+const dbWrapper = require('../database-wrapper');
 
-module.exports = UsersController;
+const getUserIdByEmail = async (req, res, next) => {
+    const gameName = req.params.gameName;
+    const gameObj = await dbWrapper.games.getByName(gameName);
+
+    if (!gameObj) {
+        res.render('app/pageNotFound');
+    }
+
+    const context = {
+        gameObj,
+    };
+
+    res.render('app/games', context);
+};
+
+module.exports = {
+
+};

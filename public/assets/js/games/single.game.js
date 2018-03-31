@@ -47,6 +47,9 @@ $(function() {
 
 $(document).on("click", ".rate", function () {
     var ratingValue = +($(this).attr("data-rating"));
+    var gameId = +($("#rate0").text());
+    // var userId = 
+    // console.log(gameId);
     // console.log(ratingValue);
     // console.log(typeof(ratingValue));
     // var xhttp = new XMLHttpRequest();
@@ -54,21 +57,25 @@ $(document).on("click", ".rate", function () {
 
     var objectToBeSent = {
         rating: ratingValue,
-        gameId: 1,
+        gameId: 49,
         userId: 1,
     };
 
-    var json = JSON2.stringify(objectToBeSent);
+    var jsonObj = JSON.stringify(objectToBeSent);
+    var url = "games/" + gameId;
+    console.log(url);
 
     $.ajax({
         type: "POST",
-        url: "/games/gameId",
-        data: json,
+        url: url,
+        data: jsonObj,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function (msg) {
-            alert('In Ajax');
+        success: function () {
+            alert("Success");
+        },
+        error: function () {
+            alert("Error");
         }
-        // failu:
     });
 });
