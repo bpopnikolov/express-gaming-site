@@ -7,11 +7,13 @@ const {
     Publisher,
     Screenshot,
     Video,
+    UserGameRating,
 } = require('../../db/models');
 
 class gamesDbWrapper extends genericDbWrapper {
     constructor() {
-        super(Game, [Genre, Platform, Publisher, Screenshot, Video]);
+        super(Game, [Genre, Platform, Publisher, Screenshot,
+                    Video, UserGameRating]);
     }
 
     async setGameModes(gameObj, gameModes) {

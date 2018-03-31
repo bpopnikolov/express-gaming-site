@@ -49,3 +49,8 @@
 .card {
     z-index: -1;
 }
+
+.inline-icon {
+    vertical-align: bottom;
+    font-size: 18px !important;
+ }
