@@ -3,6 +3,13 @@ $(function () {
 
     // parallax init
 
+    // slider init
+    $(".slider-games").slick({
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 3
+    });
+
     // rating stars effect on hover
     $(" .mdi-star-outline ").hover(
         function () {
@@ -33,15 +40,13 @@ $(function () {
                 .html("");
         });
 
-
-    // slider init
-    $(".slider-games").slick({
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 3
-    });
-
     // // textarea
     // $("#textarea1").val("");
     // M.textareaAutoResize($("#textarea1"));
+});
+
+$(document).on("click", ".rate", function () {
+    var ratingValue = +($(this).attr("data-rating"));
+    console.log(ratingValue);
+    console.log(typeof(ratingValue));
 });
