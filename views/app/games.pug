@@ -3,7 +3,7 @@ extends ../shared/master
 block append head
     link(rel="stylesheet", type="text/css", href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css")
     link(rel="stylesheet", type="text/css", href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css")
-    link(rel="stylesheet", type="text/css", href='/public/assets/styles/games/singlle.game.css')
+    link(rel="stylesheet", type="text/css", href='/public/assets/styles/games/single.game.css')
 
 block append scripts
     script(src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js")
@@ -117,13 +117,13 @@ block content
     //-             div.game-title
     //-                 | League of Legends5
     div.wr-slider
-        div.slider-games
+        div.carousel.carousel-slider
             each screenShot in gameObj.Screenshots
-                div.game-box
-                    img(src=screenShot.url).game-pic.materialboxed
+                div.game-box.carousel-item
+                    img(src=screenShot.url).game-pic
                     //- | #{screenShot.url}
             each video in gameObj.Videos
-                div.game-box
+                div.game-box.carousel-item
                     - var embededUrl = video.url.replace('watch?v=', 'embed/');
                     iframe(src=embededUrl).game-pic
                     //- img(src=video.url).game-pic
