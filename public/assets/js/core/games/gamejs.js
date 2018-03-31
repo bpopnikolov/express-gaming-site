@@ -1,18 +1,9 @@
-// var elem = document.querySelector('.carousel');
-// var instance = M.Carousel.init(elem, options);
-
-// Or with jQuery
 $(function () {
     $(".parallax").parallax();
 
-    // slider js
-    // $(".slider").slider({
-    //     indicators: true, // set false to hide slide indicators
-    //     height: 400, // set height of slider
-    //     duration: 500, // set the duration of the transition animation in ms
-    //     interval: 6000 // Set the duration between transitions in ms.
-    // });
+    // parallax init
 
+    // rating stars effect on hover
     $(" .mdi-star-outline ").hover(
         function () {
             var anchorNextToHoveredStar = $(this).next();
@@ -28,6 +19,8 @@ $(function () {
             $(".view-rating")
                 .html(($(this).attr("data-rating")) + "/10");
         },
+
+        // same but when leaving hover
         function () {
             var anchorNextToHoveredStar = $(this).next();
             var firstHiddenAnchor = $("#rate0");
@@ -44,8 +37,8 @@ $(function () {
     // slider init
     $(".slider-games").slick({
         infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 4
+        slidesToShow: 3,
+        slidesToScroll: 3
     });
 
     // // textarea

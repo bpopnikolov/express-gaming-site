@@ -37,7 +37,20 @@
 }
 
 .game-pic {
-    width: 180px;
-    height: 250px;
+    width: 230px;
+    height: 190px;
     margin: 0 auto;
 }
+
+.active {
+    z-index: 9999;
+}
+
+.card {
+    z-index: -1;
+}
+
+.inline-icon {
+    vertical-align: bottom;
+    font-size: 18px !important;
+ }
