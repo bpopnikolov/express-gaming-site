@@ -11,23 +11,36 @@ class ratingsDbWrapper extends genericDbWrapper {
         super(UserGameRating, [Game, User]);
     }
 
-    getByUserIdAndGameId(obj) {
+    getGameRatingByUserIdAndGameId(obj) {
         return this.Model.findOne({
             where: {
-                userId: obj.userId,
-                gameId: obj.gameId,
+                UserId: obj.UserId,
+                GameId: obj.GameId,
             },
             include: this.includes,
         });
     }
 
-    async findOrCreateRating(obj) {
-        // const ratingObj = await this.getByUserIdAndGameId(obj);
+    getAllGameRatings(gameId) {
+        return this.Model.findAll({
+            where: {
+                GameId: gameId,
+            },
+            include: this.includes,
+        });
+    }
 
+    updateExistingRating(savedObj, ratingObj) {
+        return savedObj.update({
+            rating: ratingObj.rating,
+        });
+    }
+
+    findOrCreateRating(obj) {
         return this.Model.findCreateFind({
             where: {
-                userId: obj.userId,
-                gameId: obj.gameId,
+                UserId: obj.UserId,
+                GameId: obj.GameId,
             },
             defaults: obj,
         });

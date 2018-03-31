@@ -29,7 +29,6 @@ const apiEditUserProfile = async (req, res, next) => {
         console.log(savedUser);
         res.send(200);
     });
-
 };
 
 const getUserProfile = async (req, res, next) => {
