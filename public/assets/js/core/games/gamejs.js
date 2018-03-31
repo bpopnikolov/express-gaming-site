@@ -47,6 +47,28 @@ $(function () {
 
 $(document).on("click", ".rate", function () {
     var ratingValue = +($(this).attr("data-rating"));
-    console.log(ratingValue);
-    console.log(typeof(ratingValue));
+    // console.log(ratingValue);
+    // console.log(typeof(ratingValue));
+    // var xhttp = new XMLHttpRequest();
+    // xhttp.open("POST", "http://localhost:3001/games/", true);
+
+    var objectToBeSent = {
+        rating: ratingValue,
+        gameId: 1,
+        userId: 1,
+    };
+
+    var json = JSON2.stringify(objectToBeSent);
+
+    $.ajax({
+        type: "POST",
+        url: "/games/gameId",
+        data: json,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            alert('In Ajax');
+        }
+        // failu:
+    });
 });
