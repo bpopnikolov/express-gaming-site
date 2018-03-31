@@ -10,11 +10,16 @@ const apiGetGamesByCategory = async (req, res, next) => {
     if (!genreObj) {
         res.render('app/pageNotFound');
     }
-
     const context = {};
     context.genre = genreNameStr;
 
-    const gamesObjsFromCateg = await dbWrapper.genres.getGames(genreObj);
+    const page = req.params.page || 0;
+    const gamesPerPage = req.params.gamesPerPage || 2;
+    const gamesFromDbStartingFrom = page * gamesPerPage;
+
+    const gamesObjsFromCateg = await dbWrapper.genres
+        .getGamesInRange(genreObj, gamesPerPage, gamesFromDbStartingFrom);
+
     const games = [];
 
     gamesObjsFromCateg.forEach((gameObj, index) => {
@@ -59,8 +64,11 @@ const getGamesByCategory = async (req, res, next) => {
     const genreNameStr = req.params.genreName;
     const genreObj = await dbWrapper.genres.hasRecord(genreNameStr);
     if (!genreObj) {
+        console.log('vlezna');
         res.render('app/pageNotFound');
+        return null;
     }
+    console.log('izlezna');
     const context = {};
     context.genreName = genreNameStr;
     res.render('genres/gamesFromGenre', context);

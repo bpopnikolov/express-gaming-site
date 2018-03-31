@@ -36,5 +36,22 @@ class genreDbWrapper extends genericDbWrapper {
             ],
         });
     }
+
+    async getGamesInRange(genreObj, limit, offset) {
+        return genreObj.getGames({
+            limit: limit,
+            offset: offset,
+
+            include: [
+                GameMode,
+                Genre,
+                Platform,
+                Publisher,
+                Screenshot,
+                Video,
+                Website,
+            ],
+        });
+    }
 }
 module.exports = genreDbWrapper;

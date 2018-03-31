@@ -8,9 +8,11 @@ const init = (app, dbWrapper) => {
     const router = new Router();
 
     router
-        .get('/:genreName', genresController.apiGetGamesByCategory);
+        .get('/:genreName', genresController.apiGetGamesByCategory)
+        .get('/:genreName/:page', genresController.apiGetGamesByCategory)
+        .get('/:genreName/:page/:gamesPerPage', genresController.apiGetGamesByCategory);
 
-    app.use('/api/genres', router);
+    app.use('/api/genres/', router);
 };
 
 module.exports = {
