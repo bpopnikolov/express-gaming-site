@@ -9,41 +9,43 @@ block append scripts
 block content
   .container.user-profile
     .row
-      .col.s12.tabs-container
-        ul.tabs
-          li.tab.col.s6
-            a.active.waves-effect.waves-purple.deep-purple-text(href='#profile') Profile
-          li.tab.col.s6
-            a.waves-effect.waves-purple.deep-purple-text(href='#test1') Change Password
+      .col.s6.offset-s3.tabs-container
+        .card-panel
+          .row
+            ul.tabs
+              li.tab.col.s6
+                a.active.waves-effect.waves-purple.deep-purple-text(href='#preview') Preview
+              li.tab.col.s6
+                a.waves-effect.waves-purple.deep-purple-text(href='#changePassword') Edit
 
-      #profile.col.s12
-        form.col.s12
-          .row
-            .input-field.col.s8.offset-s2
-              input#first_name.validate(placeholder='Placeholder', type='text')
-              label(for='first_name') First Name
-          .row
-            .input-field.col.s8.offset-s2
-              input#last_name.validate(type='text')
-              label(for='last_name') Last Name
-          .row
-            .input-field.col.s8.offset-s2
-              input#email.validate(type='email')
-              label(for='email') Email
-          .row
-            .input-field.col.s8.offset-s2
-              input#password.validate(type='password')
-              label(for='password') Password
-          .row
-            .file-field.input-field.col.s8.offset-s2
-             .btn
-               span File
-               input(type='file')
-             .file-path-wrapper
-               input.file-path.validate(type='text', placeholder='Upload avatar')
-
-      #test1.col.s12 Change Password
-
-
+            #preview.col.s12
+                .profile-container
+                  .avatar
+                    img(src="/public/assets/img/", alt="")
+            #changePassword.col.s12
+              form.col.s12
+                  .row
+                    .input-field.col.s8.offset-s2
+                      input#first_name.validate(placeholder='Placeholder', type='text')
+                      label(for='first_name') First Name
+                  .row
+                    .input-field.col.s8.offset-s2
+                      input#last_name.validate(type='text')
+                      label(for='last_name') Last Name
+                  .row
+                    .input-field.col.s8.offset-s2
+                      input#email.validate(type='email')
+                      label(for='email') Email
+                  .row
+                    .input-field.col.s8.offset-s2
+                      input#password.validate(type='password')
+                      label(for='password') Password
+                  .row
+                    .file-field.input-field.col.s8.offset-s2
+                     .btn
+                       span File
+                       input(type='file')
+                     .file-path-wrapper
+                       input.file-path.validate(type='text', placeholder='Upload avatar')
 
 

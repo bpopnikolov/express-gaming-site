@@ -1,12 +1,12 @@
 .container.user-profile {
-    margin-top: 100px;
+    padding-top: 100px;
 }
+
 /* 
 .container.user-profile div {
     margin-top: 20px;
 } */
 
-.tabs-container {
+.tabs {
     margin-bottom: 20px;
 }
-
