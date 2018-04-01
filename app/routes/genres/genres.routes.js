@@ -8,9 +8,9 @@ const init = (app, dbWrapper) => {
     const router = new Router();
 
     router
-        .get('/:genreName', genresController.getGamesByCategory )
-        .get('/:genreName/:page', genresController.getGamesByCategory )
-        .get('/:genreName/:page/:gamesPerPage', genresController.getGamesByCategory );
+        .get('/', genresController.getAllGenres)
+        .get('/:genreName', genresController.getGamesByGenre )
+        .get('/:genreName/:page', genresController.getGamesByGenre );
 
     app.use('/genres', router);
 };

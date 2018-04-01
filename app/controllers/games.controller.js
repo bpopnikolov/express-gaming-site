@@ -1,6 +1,5 @@
 // const dbWrapper = require('../database-wrapper');
 
-
 class GamesController {
     constructor(dbWrapper) {
         this.dbWrapper = dbWrapper;

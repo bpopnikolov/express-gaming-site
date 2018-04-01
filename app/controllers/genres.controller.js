@@ -4,17 +4,29 @@ const getAll = async (req, res, next) => {
     return dbWrapper.genres.getAll();
 };
 
-const apiGetGamesByCategory = async (req, res, next) => {
+const apiGetAllGenres = async (req, res, next) => {
+    const allGenresObjs = await dbWrapper.genres.getAll();
+    const context = {};
+    context.allGenres = allGenresObjs.map((genre) => genre.name);
+    res.send(context);
+};
+
+const getAllGenres = async (req, res, next) => {
+    res.render('genres/allGenres');
+};
+
+const apiGetGamesByGenre = async (req, res, next) => {
     const genreNameStr = req.params.genreName;
     const genreObj = await dbWrapper.genres.hasRecord(genreNameStr);
     if (!genreObj) {
         res.render('app/pageNotFound');
+        return 0;
     }
     const context = {};
     context.genre = genreNameStr;
 
-    const page = req.params.page || 0;
-    const gamesPerPage = req.params.gamesPerPage || 2;
+    const page = (req.params.page || 1)-1;
+    const gamesPerPage = 2;
     const gamesFromDbStartingFrom = page * gamesPerPage;
 
     const gamesObjsFromCateg = await dbWrapper.genres
@@ -56,26 +68,28 @@ const apiGetGamesByCategory = async (req, res, next) => {
     });
 
     context.gamesObjs = games;
-    console.log(context);
     res.send(context);
 };
 
-const getGamesByCategory = async (req, res, next) => {
+const getGamesByGenre = async (req, res, next) => {
     const genreNameStr = req.params.genreName;
     const genreObj = await dbWrapper.genres.hasRecord(genreNameStr);
     if (!genreObj) {
-        console.log('vlezna');
         res.render('app/pageNotFound');
         return null;
     }
-    console.log('izlezna');
     const context = {};
     context.genreName = genreNameStr;
+    const gamesPerPage = 2;
+    context.pagesCount = Math.ceil((await dbWrapper.genres.getGames(genreObj)).length / gamesPerPage);
     res.render('genres/gamesFromGenre', context);
 };
 
 module.exports = {
     getAll,
-    apiGetGamesByCategory,
-    getGamesByCategory,
+    apiGetAllGenres,
+    getAllGenres,
+    apiGetGamesByGenre,
+    getGamesByGenre,
 };
+
