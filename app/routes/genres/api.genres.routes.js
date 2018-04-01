@@ -8,9 +8,9 @@ const init = (app, dbWrapper) => {
     const router = new Router();
 
     router
-        .get('/:genreName', genresController.apiGetGamesByCategory)
-        .get('/:genreName/:page', genresController.apiGetGamesByCategory)
-        .get('/:genreName/:page/:gamesPerPage', genresController.apiGetGamesByCategory);
+        .get('/', genresController.apiGetAllGenres)
+        .get('/:genreName', genresController.apiGetGamesByGenre)
+        .get('/:genreName/:page', genresController.apiGetGamesByGenre);
 
     app.use('/api/genres/', router);
 };

@@ -14,86 +14,15 @@ block content
                     | Genre:
                 h5.category-text
                     | #{genreName}
+                h5
+                    | Has #{gamesCount} Games
         
-        .row.center-align
-            .game-wrapper
-                    img(src='https://upload.wikimedia.org/wikipedia/commons/f/f8/Jonathan_Carroll_as_Superman.jpg').game-pic
-                    .game-name Game Title: Kor
-                    .game-rating Rating: 4/5
-                    .game-genres Genres: kor, kor, kor
-
-            .game-wrapper
-                    img(src='https://upload.wikimedia.org/wikipedia/commons/f/f8/Jonathan_Carroll_as_Superman.jpg').game-pic
-                    .game-name Game Title: Kor
-                    .game-rating Rating: 4/5
-                    .game-genres Genres: kor, kor, kor
-            
-            .game-wrapper
-                    img(src='https://upload.wikimedia.org/wikipedia/commons/f/f8/Jonathan_Carroll_as_Superman.jpg').game-pic
-                    .game-name Game Title: Kor
-                    .game-rating Rating: 4/5
-                    .game-genres Genres: kor, kor, kor
-
-            .game-wrapper
-                    img(src='https://upload.wikimedia.org/wikipedia/commons/f/f8/Jonathan_Carroll_as_Superman.jpg').game-pic
-                    .game-name Game Title: Kor
-                    .game-rating Rating: 4/5
-                    .game-genres Genres: kor, kor, kor
-
-            .game-wrapper
-                    img(src='https://upload.wikimedia.org/wikipedia/commons/f/f8/Jonathan_Carroll_as_Superman.jpg').game-pic
-                    .game-name Game Title: Kor
-                    .game-rating Rating: 4/5
-                    .game-genres Genres: kor, kor, kor
-
-            .game-wrapper
-                    img(src='https://upload.wikimedia.org/wikipedia/commons/f/f8/Jonathan_Carroll_as_Superman.jpg').game-pic
-                    .game-name Game Title: Kor
-                    .game-rating Rating: 4/5
-                    .game-genres Genres: kor, kor, kor
-
-            .game-wrapper
-                    img(src='https://upload.wikimedia.org/wikipedia/commons/f/f8/Jonathan_Carroll_as_Superman.jpg').game-pic
-                    .game-name Game Title: Kor
-                    .game-rating Rating: 4/5
-                    .game-genres Genres: kor, kor, kor
-            
-            .game-wrapper
-                    img(src='https://upload.wikimedia.org/wikipedia/commons/f/f8/Jonathan_Carroll_as_Superman.jpg').game-pic
-                    .game-name Game Title: Kor
-                    .game-rating Rating: 4/5
-                    .game-genres Genres: kor, kor, kor
-
-            .game-wrapper
-                    img(src='https://upload.wikimedia.org/wikipedia/commons/f/f8/Jonathan_Carroll_as_Superman.jpg').game-pic
-                    .game-name Game Title: Kor
-                    .game-rating Rating: 4/5
-                    .game-genres Genres: kor, kor, kor
-
-            .game-wrapper
-                    img(src='https://upload.wikimedia.org/wikipedia/commons/f/f8/Jonathan_Carroll_as_Superman.jpg').game-pic
-                    .game-name Game Title: Kor
-                    .game-rating Rating: 4/5
-                    .game-genres Genres: kor, kor, kor
+        
         
         ul.pagination
-            li.disabled
-                a(href='#!')
-                    i.material-icons chevron_left
-            li.active
-                a(href='#!') 1
-            li.waves-effect
-                a(href='#!') 2
-            li.waves-effect
-                a(href='#!') 3
-            li.waves-effect
-                a(href='#!') 4
-            li.waves-effect
-                a(href='#!') 5
-            li.waves-effect
-                a(href='#!')
-                    i.material-icons chevron_right
-                    
+            - for (var i=1; i<=pagesCount; i++)
+                li.waves-effect
+                    a(href='http://localhost:3001/genres/Shooter/'+i+' ')= i
 
             
 

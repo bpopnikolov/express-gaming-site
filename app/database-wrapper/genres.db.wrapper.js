@@ -15,7 +15,7 @@ class genreDbWrapper extends genericDbWrapper {
         super(Genre, []);
     }
 
-    hasRecord(genreNameStr) {
+    async hasRecord(genreNameStr) {
         return Genre.findOne({
             where: {
                 name: genreNameStr,
