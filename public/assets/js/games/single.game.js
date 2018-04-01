@@ -50,7 +50,7 @@ $(function () {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: location.pathname + "/api",
+        url: "/api" + location.pathname + "/getUserRating",
         success: function (data) {
             if (data.ratingGiven) {
                 visualizeUserRatedGame(data.ratingGiven);
@@ -132,7 +132,7 @@ $(document).on("click", ".rate", function () {
         rating: ratingValue
     };
     var jsonObj = JSON.stringify(objectToBeSent);
-    var url = location.pathname;
+    var url = "/api" + location.pathname + "/setUserRating";
 
     $.ajax({
         type: "POST",

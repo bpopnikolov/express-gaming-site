@@ -7,10 +7,23 @@ const errorsConfig = require('../../config/errors.config');
 
 const init = (app, dbWrapper) => {
     const router = new Router();
+    const controller = new UsersController(dbWrapper);
 
-    router.get('/:username', (req, res, next) => {
-        UsersController.getUserProfile(req, res, next);
-        res.render('users/edit');
+    router.get('/:username', async (req, res, next) => {
+        const username = req.params.username;
+        const user = await controller.getUserByUsername(username);
+
+        if (req.isAuthenticated() && user.username === req.user.username) {
+            return res.redirect('/users/profile/edit');
+        }
+
+        if (user) {
+            // render user profile page
+        }
+
+
+        // else go to page not found
+        return next();
     });
 
     router.get('/profile/edit', (req, res, next) => {

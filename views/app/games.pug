@@ -35,7 +35,10 @@ block content
                     br
                     br
         div.parallax
-            img(src="http://my.telerikacademy.com/content/Images/Admission/telerik-logo-black.png")
+            if gameObj.cover
+                img(src=gameObj.cover)
+            else
+               img(src="/public/assets/img/geforce-now-gamewall-v2.png") 
     div.container
         div.section
             div.row

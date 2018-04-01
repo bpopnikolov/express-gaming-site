@@ -9,6 +9,8 @@
 .parallax img {
     height: 1000px;
     width: 1000px;
+    -webkit-filter: blur(10px);
+    filter: blur(20px) grayscale(80%);
 }
 
 .game-cover {

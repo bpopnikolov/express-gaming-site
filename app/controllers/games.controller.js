@@ -1,106 +1,81 @@
-const dbWrapper = require('../database-wrapper');
+// const dbWrapper = require('../database-wrapper');
 
-const getByName = async (req, res, next) => {
-    const gameName = req.params.gameName;
 
-    const gameObj = await dbWrapper.games.getByName(gameName);
-
-    const ratingObj = await dbWrapper.ratings.getAllGameRatings(gameObj.id);
-
-    const userCount = ratingObj.count;
-
-    const sumOfRatings = ratingObj.rows.reduce((accumulator, currentObj) =>
-        accumulator + currentObj.rating, 0);
-
-    const avgRating = (sumOfRatings / userCount).toFixed(1);
-
-    if (!gameObj) {
-        res.render('app/pageNotFound');
+class GamesController {
+    constructor(dbWrapper) {
+        this.dbWrapper = dbWrapper;
     }
 
-    const context = {
-        gameObj,
-        avgRating,
-        userCount,
-    };
+    async getByName(gameName) {
+        const gameObj = await this.dbWrapper.games.getByName(gameName);
 
-    res.render('app/games', context);
-};
-
-const apiGetByName = async (req, res, next) => {
-    const gameName = req.params.gameName;
-    const gameObj = await dbWrapper.games.getByName(gameName);
-    if (!gameObj) {
-        res.render('app/pageNotFound');
-    }
-    const gameId = gameObj.id;
-
-    const context = {};
-
-    if (req.user) {
-        const userId = req.user.id;
-        const objToCheck = {
-            GameId: +gameId,
-            UserId: +userId,
-        };
-        const ratingGiven =
-            await dbWrapper.ratings.getGameRatingByUserIdAndGameId(objToCheck);
-
-        if (ratingGiven) {
-            context.ratingGiven = ratingGiven.rating;
+        if (!gameObj) {
+            return gameObj;
         }
-        res.send(context);
-    }
-};
 
-const apiSetGameRating = async (req, res, next) => {
-    if (!req.user) {
-        res.status(401).json({
-            error: true,
-            msg: 'You must be logged in in order to vote.',
-        });
-    }
-    const rating = req.body.rating;
-    const gameName = req.params.gameName;
-    const gameObj = await dbWrapper.games.getByName(gameName);
-    const GameId = gameObj.id;
-    const UserId = req.user.id;
-    const ratingObj = {
-        rating: +rating,
-        GameId: +GameId,
-        UserId: +UserId,
-    };
+        const ratingObj = await this.dbWrapper.ratings.getAllGameRatings(gameObj.id);
 
-    const savedRating =
-        await dbWrapper.ratings.getGameRatingByUserIdAndGameId(ratingObj);
-    const contextOfUserRatingReq =
-        savedRating ?
-        await dbWrapper.ratings.updateExistingRating(savedRating, ratingObj) :
-        await dbWrapper.ratings.create(ratingObj);
+        const userCount = ratingObj.count;
 
-    const ratingObjOfGame =
-        await dbWrapper.ratings.getAllGameRatings(gameObj.id);
-
-    const userCount = ratingObjOfGame.count;
-
-    const sumOfRatings =
-        ratingObjOfGame.rows.reduce((accumulator, currentObj) =>
+        const sumOfRatings = ratingObj.rows.reduce((accumulator, currentObj) =>
             accumulator + currentObj.rating, 0);
 
-    const avgRating = (sumOfRatings / userCount).toFixed(1);
-    const contextOfAvgRating = {
-        avgRating,
-        userCount,
-    };
-    const context = {
-        contextOfUserRatingReq,
-        contextOfAvgRating,
-    };
-    res.send(context);
-};
+        const avgRating = (sumOfRatings / userCount).toFixed(1);
 
-module.exports = {
-    getByName,
-    apiSetGameRating,
-    apiGetByName,
-};
+        gameObj.avgRating = avgRating;
+        gameObj.userCount = userCount;
+
+        return gameObj;
+    }
+
+    async getGameUserRating(user, gameObj) {
+        const objToCheck = {
+            GameId: +gameObj.id,
+            UserId: +user.id,
+        };
+        const ratingGiven =
+            await this.dbWrapper.ratings.getGameRatingByUserIdAndGameId(objToCheck);
+
+        return ratingGiven;
+    }
+
+
+    async setGameRating(user, gameObj, rating) {
+        const ratingObj = {
+            rating: +rating,
+            GameId: +gameObj.id,
+            UserId: +user.id,
+        };
+
+        const savedRating =
+            await this.dbWrapper.ratings.getGameRatingByUserIdAndGameId(ratingObj);
+
+        const contextOfUserRatingReq =
+            savedRating ?
+            await this.dbWrapper.ratings.updateExistingRating(savedRating, ratingObj) :
+            await this.dbWrapper.ratings.create(ratingObj);
+
+        const ratingObjOfGame =
+            await this.dbWrapper.ratings.getAllGameRatings(gameObj.id);
+
+        const userCount = ratingObjOfGame.count;
+
+        const sumOfRatings =
+            ratingObjOfGame.rows.reduce((accumulator, currentObj) =>
+                accumulator + currentObj.rating, 0);
+
+        const avgRating = (sumOfRatings / userCount).toFixed(1);
+        const contextOfAvgRating = {
+            avgRating,
+            userCount,
+        };
+
+        return {
+            contextOfUserRatingReq,
+            contextOfAvgRating,
+        };
+    }
+}
+
+
+module.exports = GamesController;

@@ -14,20 +14,20 @@ const attachUserToResponse = (req, res, next) => {
     next();
 };
 
-const attachGenresToResponse = async (req, res, next) => {
-    const genres = await GenresController.getAll() || [];
-    res.locals.genres = genres;
-    next();
-};
+// const attachGenresToResponse = async (req, res, next) => {
+//     const genres = await GenresController.getAll() || [];
+//     res.locals.genres = genres;
+//     next();
+// };
 
-const attachPlatformsToResponse = async (req, res, next) => {
-    const platforms = await PlatformsController.getAll() || [];
-    res.locals.platforms = platforms;
-    next();
-};
+// const attachPlatformsToResponse = async (req, res, next) => {
+//     const platforms = await PlatformsController.getAll() || [];
+//     res.locals.platforms = platforms;
+//     next();
+// };
 
-app.use(attachGenresToResponse);
-app.use(attachPlatformsToResponse);
+// app.use(attachGenresToResponse);
+// app.use(attachPlatformsToResponse);
 
 app.use(attachUserToResponse);
 

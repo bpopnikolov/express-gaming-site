@@ -3,6 +3,12 @@ const validateEmail = (email) => {
     return re.test(String(email).toLowerCase());
 };
 
+const isImage = (filename) => {
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+    return allowedExtensions.exec(filename);
+};
+
 module.exports = {
     validateEmail,
+    isImage,
 };
