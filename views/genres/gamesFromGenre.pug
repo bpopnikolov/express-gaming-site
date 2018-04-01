@@ -14,15 +14,13 @@ block content
                     | Genre:
                 h5.category-text
                     | #{genreName}
-                h5
-                    | Has #{gamesCount} Games
         
         
         
         ul.pagination
             - for (var i=1; i<=pagesCount; i++)
                 li.waves-effect
-                    a(href='http://localhost:3001/genres/Shooter/'+i+' ')= i
+                    a(href='http://localhost:3001/genres/'+genreName+'/'+i+' ')= i
 
             
 
