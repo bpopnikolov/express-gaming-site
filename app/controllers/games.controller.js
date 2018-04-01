@@ -2,7 +2,6 @@ const dbWrapper = require('../database-wrapper');
 
 const getByName = async (req, res, next) => {
     const gameName = req.params.gameName;
-    console.log(gameName);
     const gameObj = await dbWrapper.games.getByName(gameName);
 
     const ratingObj = await dbWrapper.ratings.getAllGameRatings(gameObj.id);

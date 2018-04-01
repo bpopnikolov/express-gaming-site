@@ -68,7 +68,6 @@ const apiGetGamesByGenre = async (req, res, next) => {
     });
 
     context.gamesObjs = games;
-    console.log(context);
     res.send(context);
 };
 
