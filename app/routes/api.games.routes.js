@@ -12,12 +12,9 @@ const init = (app, dbWrapper) => {
     const router = new Router();
 
     router
-        .post('/:gameId', gamesController.apiSetGameRating);
-    // router
-    //     .post('/:gameId', async (req, res) => {
-    //         console.log(req.params);
-    //         res.render('app/games');
-    //     });
+        .get('/:gameName/api', gamesController.apiGetByName)
+        .post('/:gameName', gamesController.apiSetGameRating);
+
     app.use('/games', router);
 };
 

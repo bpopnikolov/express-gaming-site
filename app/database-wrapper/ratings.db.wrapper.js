@@ -22,7 +22,7 @@ class ratingsDbWrapper extends genericDbWrapper {
     }
 
     getAllGameRatings(gameId) {
-        return this.Model.findAll({
+        return this.Model.findAndCountAll({
             where: {
                 GameId: gameId,
             },
