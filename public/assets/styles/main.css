@@ -15,6 +15,14 @@ body {
     background-color: #673ab7 !important;
 }
 
+div.error {
+    color: red;
+}
+
+.container {
+    margin-top: 100px;
+}
+
 #toast-container {
     top: auto !important;
     right: auto !important;

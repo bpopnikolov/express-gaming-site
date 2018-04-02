@@ -1,30 +1,40 @@
 extends ../shared/master
 
+block append scripts
+    script(src="/public/assets/js/core/auth/register.js")
+
+
 block content
-    div.row
-        form.col.s12(action="/auth/register", method="post")
-            div.row
-                h2
-                    span.col.s12
-                    | Create an account
-            div.row
-                div.input-field.col.s6
-                    input.validate(type="text", name="first_name", placeholder="First Name")
-                    label(for="first_name")
-                        | First Name
-                div.input-field.col.s6
-                    input.validate(type="text", name="last_name", placeholder="Last Name")
-                    label(for="last_name")
-                        | Last Name
-            div.row
-                div.input-field.col.s6
-                    input.validate(type="email", name="email", placeholder="Email")
-                    label(for="email")
-                        | Email Address
-                div.input-field.col.s6
-                    input.validate(type="password", name="password", placeholder="Password")
-                    label(for="password")
-                        | Password
-            div.row
-                button.btn(type="submit")
-                    | Create an account
+    .container
+     .row
+       .col.s12.m10.offset-m1.xl6.offset-xl3
+         .card-panel
+          .row
+            .col.s8.offset-s2
+              h4 Register
+            .row
+                form#registerForm.col.s12(action="/auth/register", method="post",)
+                    .row
+                        div.input-field.col.s8.offset-s2
+                            input.validate(type="text", name="first_name", placeholder="First Name", required="true")
+                            label(for="first_name")
+                                | First Name
+                    .row
+                        div.input-field.col.s8.offset-s2
+                            input.validate(type="text", name="last_name", placeholder="Last Name", required="true")
+                            label(for="last_name")
+                                | Last Name
+                    .row
+                        div.input-field.col.s8.offset-s2
+                            input.validate(type="email", name="email", placeholder="Email", required="true")
+                            label(for="email")
+                                | Email
+                    .row
+                        div.input-field.col.s8.offset-s2
+                            input.validate(type="password", name="password", placeholder="Password", required="true" pattern=".{5,}")
+                            label(for="password")
+                                | Password
+                    .row
+                        .col.s4.offset-s7
+                            button.btn(type="submit")
+                                | Register
