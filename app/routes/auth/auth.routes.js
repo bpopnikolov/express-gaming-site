@@ -9,10 +9,18 @@ const init = (app, dbWrapper) => {
 
     router
         .get('/register', async (req, res) => {
+            if (req.isAuthenticated()) {
+                res.redirect('/');
+            }
+
             res.render('auth/register');
         })
         .post('/register', AuthController.register)
         .get('/login', async (req, res) => {
+            if (req.isAuthenticated()) {
+                res.redirect('/');
+            }
+
             res.render('auth/login');
         })
         .post('/login', AuthController.login)

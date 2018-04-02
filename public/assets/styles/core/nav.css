@@ -14,6 +14,15 @@ nav {
 
 .logo {
     font-size: 2.1em;
+    background: linear-gradient(to right, #b3ffab, #12fff7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent; */
+
+
 }
 
 .user-info {
@@ -26,4 +35,8 @@ nav {
 .profile-image {
     margin-top: 10px;
     margin-right: 10px;
+}
+
+.hello-user{
+
 }

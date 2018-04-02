@@ -20,6 +20,8 @@
         "Promise": true,
         "console": true,
         "alert": true,
-        "FormData": true
+        "FormData": true,
+        "window": true,
+        "M": true
     }
 }
