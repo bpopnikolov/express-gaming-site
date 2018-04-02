@@ -1,4 +1,5 @@
 $(function () {
+
   (function setPagination() {
     var paramsFromPath = location.pathname.split('/')
       .filter(function (el) {
@@ -13,7 +14,7 @@ $(function () {
     if (curPage >= 1 && curPage <= Number($('ul.pagination li.waves-effect').last().text())) {
       $(`ul.pagination li.waves-effect:contains(${curPage})`).addClass("active");
     }
-
+    
   })();
 
   $('.container.center-align').append(`
@@ -58,6 +59,7 @@ $(function () {
       $('.game-container').hide();
       $('.preloader-wrapper').remove();
       $('.game-container').fadeIn("slow");
+
     }
   });
 });

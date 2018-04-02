@@ -18,7 +18,7 @@ const init = (app, dbWrapper) => {
 
         const context = {};
         context.genreName = genreNameStr;
-        const gamesPerPage = 2;
+        const gamesPerPage = 10;
         context.pagesCount = Math.ceil(games.length / gamesPerPage);
 
         return res.render('genres/gamesFromGenre', context);
