@@ -2,7 +2,7 @@ const {
     Router,
 } = require('express');
 
-const GamesController = require('../controllers/games.controller');
+const GamesController = require('../../controllers/games.controller');
 
 const init = (app, dbWrapper) => {
     const router = new Router();
@@ -23,7 +23,7 @@ const init = (app, dbWrapper) => {
                 userCount: gameObj.userCount,
             };
 
-            return res.render('app/games', context);
+            return res.render('games/single-game', context);
         });
 
     app.use('/games', router);
