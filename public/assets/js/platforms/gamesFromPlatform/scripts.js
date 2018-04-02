@@ -35,12 +35,12 @@ $(function () {
   $.ajax({
     type: "GET",
     dataType: "json",
-    url: "http://localhost:3001/" + "api" + location.pathname,
+    url: "/api" + location.pathname,
     success: function (data) {
       var gamesContainer = $('<div class="row center-align game-container"></div>');
       var gamesObjs = data.gamesObjs;
       gamesObjs.forEach(game => {
-        var gameBox = $(`<a href="http://localhost:3001/games/${game.name}" class="game-wrapper"></a>`);
+        var gameBox = $(`<a href="/games/${game.name}" class="game-wrapper"></a>`);
 
         var gameImgJQ = $(`<img src="${game.coverUrl}" class="game-pic"></img>`);
         var gameTitleJQ = $(`<div class="game-name">Title: <span class="game-label-value">${game.name}<span></div>`);
