@@ -4,6 +4,7 @@ function visualizeUserRatedGame(rating) {
     var ratedStar = $(`#rate${rating}`);
     var starNextToRated = $(`#rate${rating + 1}`);
 
+
     $(firstHiddenStar).nextUntil(starNextToRated)
         .removeClass("mdi-star")
         .removeClass("clicked")
@@ -25,10 +26,13 @@ function visualizeUserRatedGame(rating) {
     //     .html(`Based on ${data.contextOfAvgRating.userCount} user ratings`)
 };
 
-$(function () {
+$(function() {
     $(".parallax").parallax();
 
     $(".materialboxed").materialbox();
+
+    $('#reviewInput').trigger('autoresize');
+    $('input#input_text, textarea#reviewInput').characterCounter();
 
     // replace prallax img url
     var $parallaxImg = $(".parallax img");
@@ -51,8 +55,9 @@ $(function () {
         type: "GET",
         dataType: "json",
         url: "/api" + location.pathname + "/getUserRating",
-        success: function (data) {
+        success: function(data) {
             if (data.ratingGiven) {
+                localStorage.setItem("userRating", data.ratingGiven);
                 visualizeUserRatedGame(data.ratingGiven);
             }
         }
@@ -60,7 +65,7 @@ $(function () {
 
     // rating stars effect on hover
     $(".mdi-star-outline").hover(
-        function () {
+        function() {
             var anchorNextToHoveredStar = $(this).next();
             var firstHiddenAnchor = $("#rate0");
             var clickedStar = $(".clicked");
@@ -90,7 +95,7 @@ $(function () {
         },
 
         // same but when leaving hover
-        function () {
+        function() {
             var anchorNextToHoveredStar = $(this).next();
             var firstHiddenAnchor = $("#rate0");
             var clickedStar = $(".clicked");
@@ -120,68 +125,151 @@ $(function () {
             }
         });
 
-    $("#review-form").on("change", function () {
-        if ($("#textarea").val()) {
-            $("#post-review").removeClass("disabled");
-        } else {
-            $("#post-review").addClass("disabled");
-        }
+    $(document).on("click", ".rate", function() {
+        var firstHiddenStar = $("#rate0");
+        var lastHiddenStar = $("#rate11");
+        var clickedStar = $(this);
+        var starNextToClicked = $(this).next();
+        var ratingValue = +($(this).attr("data-rating"));
+
+        var objectToBeSent = {
+            rating: ratingValue
+        };
+        var jsonObj = JSON.stringify(objectToBeSent);
+        var url = "/api" + location.pathname + "/setUserRating";
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: jsonObj,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data) {
+                $(firstHiddenStar).nextUntil(lastHiddenStar)
+                    .removeClass("mdi-star")
+                    .removeClass("clicked")
+                    .addClass("mdi-star-outline");
+
+                // save rating to local storage
+                localStorage.setItem("userRating", data.contextOfUserRatingReq.rating);
+
+                $(clickedStar).addClass("clicked");
+
+                $(firstHiddenStar).nextUntil(starNextToClicked)
+                    .removeClass("mdi-star-outline")
+                    .addClass("mdi-star");
+
+                $(".view-rating")
+                    .html("You've rated this game: " + data.contextOfUserRatingReq.rating + "/10");
+
+                $(".avg-rating")
+                    .html(`${data.contextOfAvgRating.avgRating}`)
+
+                $(".user-count")
+                    .html(`Based on ${data.contextOfAvgRating.userCount} user ratings`);
+                // alert("Success");
+            },
+            error: function() {
+                alert(`Only registered users who are logged in users may vote.
+    Please register and/or log in and try again.`);
+            }
+        });
     });
-});
 
-$(document).on("click", ".rate", function () {
-    var firstHiddenStar = $("#rate0");
-    var lastHiddenStar = $("#rate11");
-    var clickedStar = $(this);
-    var starNextToClicked = $(this).next();
-    var ratingValue = +($(this).attr("data-rating"));
 
-    var objectToBeSent = {
-        rating: ratingValue
-    };
-    var jsonObj = JSON.stringify(objectToBeSent);
-    var url = "/api" + location.pathname + "/setUserRating";
+    var $reviewsForm = $('.review-form');
 
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: jsonObj,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            $(firstHiddenStar).nextUntil(lastHiddenStar)
-                .removeClass("mdi-star")
-                .removeClass("clicked")
-                .addClass("mdi-star-outline");
+    $reviewsForm.validate({
+        rules: {
+            reviewInput: {
+                required: true,
+                minlength: 5
+            },
 
-            $(clickedStar).addClass("clicked");
-
-            $(firstHiddenStar).nextUntil(starNextToClicked)
-                .removeClass("mdi-star-outline")
-                .addClass("mdi-star");
-
-            $(".view-rating")
-                .html("You've rated this game: " + data.contextOfUserRatingReq.rating + "/10");
-
-            $(".avg-rating")
-                .html(`${data.contextOfAvgRating.avgRating}`)
-
-            $(".user-count")
-                .html(`Based on ${data.contextOfAvgRating.userCount} user ratings`);
-            // alert("Success");
         },
-        error: function () {
-            alert(`Only registered users who are logged in users may vote.
-Please register and/or log in and try again.`);
+
+        //For custom messages
+        messages: {
+            reviewInput: {
+                required: "You must leave a review",
+                minlength: $.validator.format("Enter at least {0} characters")
+            },
+        },
+        errorElement: "div",
+        errorPlacement: function(error, element) {
+            var placement = $(element).data("error");
+            if (placement) {
+                $(placement).append(error);
+            } else {
+                if ($(element).attr("type") === "file") {
+                    $(error).insertAfter(".file-path.validate");
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        },
+        submitHandler: function(v) {
+            console.log('test');
+            // const rating = localStorage.getItem("userRating");
+            // if (!rating) {
+            //     alert("YOU MUST RATE THE GAME FIRST");
+            //     return;
+            // }
+
+            // var $card = $('<div>');
+            // $card.addClass('card', 'horizontal');
+
+            // var $cardStacked = $('<div>');
+            // $cardStacked.addClass('card-stacked');
+
+            // var $cardTitle = $('<div>');
+            // $cardTitle.addClass('card-title');
+            // $cardTitle.text('BOBBY');
+
+            // var $cardContent = $('<div>');
+            // $cardContent.addClass('card-content');
+
+            // var $userRating = $('<span>');
+            // $userRating.addClass('right');
+            // $userRating.text("10/10")
+
+            // var $cardContent = $('<div>');
+            // $cardContent.addClass('card-content');
+
+            // var $review = $('<p>')
+            // $review.text("asdasdasdasdasdad");
+
+            // $cardTitle.append($userRating);
+
+            // $cardContent.append($cardTitle)
+            // $cardContent.append($review);
+
+            // $cardStacked.append($cardContent);
+
+            // $card.append($cardStacked);
+
+            // $(".reviewsWrapper").append($card);
+
+            // v.currentForm.preventDefault();
+            const json = {
+                gameName: decodeURIComponent(location.pathname.split('games/')[1]),
+                review: $('#reviewInput').val()
+            };
+
+            httpClient.ajax({
+                url: "/api/reviews/addUserReview",
+                type: "POST",
+                data: json,
+
+            }).then(function(response) {
+                console.log(response);
+
+            }).catch(function(err) {
+                console.log(err);
+                M.toast({
+                    html: "Profile wasn't updated"
+                });
+            });
         }
     });
 });
-
-// $(document).on("change", "#textarea", function () {
-//         if ($("#textarea").text() !== "") {
-//             $("#post-review").removeClass("disabled");
-//         } else {
-//             $("#post-review").addClass("disabled");
-//         }
-// });
-

@@ -9,3 +9,6 @@ window.httpClient = (function() {
         ajax: ajax
     };
 })();
+
+// clear local storage
+localStorage.clear();
