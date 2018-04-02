@@ -67,7 +67,7 @@ const register = async (req, res, next) => {
     const savedUser = await dbWrapper
         .users.create(user);
 
-    return res.status(201).redirect('/login').end();
+    return res.status(201).redirect('/auth/login').end();
 };
 
 module.exports = {
