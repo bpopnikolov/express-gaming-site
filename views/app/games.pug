@@ -112,16 +112,16 @@ block content
                     img(src="#").game-pic
     div.container.z-depth-1
         .col.s12
-            h4.header 
+            h4.header.center
                 | Reviews
                 .card.horizontal
                     .card-stacked
                         .card-content
-                            form.col.s12
+                            form#review-form.col.s12
                                 div.input-field.col.s12
-                                    textarea#textarea1.materialize-textarea
-                                    label(for='textarea1') Write a review...
+                                    textarea#textarea.materialize-textarea
+                                    label(for='textarea') Write a review...
                         .card-action
-                            button.btn.waves-effect.waves-light.right(type='submit', name='action')
-                                | Submit
+                            button#post-review.btn.waves-effect.waves-light.right.disabled(type='submit', name='post-review')
+                                | Post
                                 i.material-icons.right send

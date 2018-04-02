@@ -119,6 +119,14 @@ $(function () {
                     .html("Need more ratings");
             }
         });
+
+    $("#review-form").on("change", function () {
+        if ($("#textarea").val()) {
+            $("#post-review").removeClass("disabled");
+        } else {
+            $("#post-review").addClass("disabled");
+        }
+    });
 });
 
 $(document).on("click", ".rate", function () {
@@ -168,3 +176,12 @@ Please register and/or log in and try again.`);
         }
     });
 });
+
+// $(document).on("change", "#textarea", function () {
+//         if ($("#textarea").text() !== "") {
+//             $("#post-review").removeClass("disabled");
+//         } else {
+//             $("#post-review").addClass("disabled");
+//         }
+// });
+
