@@ -2,8 +2,8 @@ const {
     Router,
 } = require('express');
 
-const GamesController = require('../controllers/games.controller');
-const errorsConfig = require('../config/errors.config');
+const GamesController = require('../../controllers/games.controller');
+const errorsConfig = require('../../config/errors.config');
 
 
 const init = (app, dbWrapper) => {

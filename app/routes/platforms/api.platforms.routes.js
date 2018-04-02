@@ -2,27 +2,27 @@ const {
     Router,
 } = require('express');
 
-const GenresController = require('../../controllers/genres.controller');
+const PlatformsController = require('../../controllers/platforms.controller');
 
 const init = (app, dbWrapper) => {
     const router = new Router();
-    const controller = new GenresController(dbWrapper);
+    const controller = new PlatformsController(dbWrapper);
 
     const apiMiddleware = async (req, res, next) => {
-        const genreNameStr = req.params.genreName;
+        const platformNameStr = req.params.platformName;
 
         const page = (req.params.page || 1) - 1;
         const gamesPerPage = 10;
         const gamesFromDbStartingFrom = page * gamesPerPage;
 
-        const gamesInRange = await controller.getGamesInRange(genreNameStr, gamesPerPage, gamesFromDbStartingFrom);
+        const gamesInRange = await controller.getGamesInRange(platformNameStr, gamesPerPage, gamesFromDbStartingFrom);
 
         if (!gamesInRange) {
             return next();
         }
 
         const context = {};
-        context.genre = genreNameStr;
+        context.platfrom = platformNameStr;
 
         const games = [];
 
@@ -65,16 +65,16 @@ const init = (app, dbWrapper) => {
 
     router
         .get('/', async (req, res, next) => {
-            const allGenresObjs = await controller.getAllGenres();
+            const allPlatformsObjs = await controller.getAllPlatforms();
 
             const context = {};
-            context.allGenres = allGenresObjs.map((genre) => genre.name);
+            context.allPlatforms = allPlatformsObjs.map((platform) => platform.name);
             res.send(context);
         })
-        .get('/:genreName', apiMiddleware)
-        .get('/:genreName/:page', apiMiddleware);
+        .get('/:platformName', apiMiddleware)
+        .get('/:platformName/:page', apiMiddleware);
 
-    app.use('/api/genres/', router);
+    app.use('/api/platforms/', router);
 };
 
 module.exports = {
