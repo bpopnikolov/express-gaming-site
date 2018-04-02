@@ -1,11 +1,7 @@
-const dbWrapper = require('../database-wrapper');
+class PlatformsController {
+    constructor(dbWrapper) {
+        this.dbWrapper = dbWrapper;
+    }
+}
 
-
-const getAll = async () => {
-    return dbWrapper.platforms.getAll();
-};
-
-
-module.exports = {
-    getAll,
-};
+module.exports = PlatformsController;

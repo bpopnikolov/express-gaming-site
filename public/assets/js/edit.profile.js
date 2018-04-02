@@ -14,12 +14,12 @@ $(function() {
         var avatar = $("#avatar").prop("files")[0] || null;
 
         var allowedExtensions = /(jpg|jpeg|png|gif)$/i;
-
-        if (!allowedExtensions.exec(avatar.type)) {
-            alert("FILE TYPE ERROR");
-            return;
+        if (avatar) {
+            if (!allowedExtensions.exec(avatar.type)) {
+                alert("FILE TYPE ERROR");
+                return;
+            }
         }
-
         var formData = new FormData(e.target);
 
         ajax({
@@ -31,6 +31,11 @@ $(function() {
             processData: false
         }).then(function(response) {
             console.log(response);
+            $("form")[0].reset();
+            M.updateTextFields();
+            M.toast({
+                html: "Profile was updated"
+            });
             $(".avatar img").attr("src", response.avatar);
             $(".profile-image").attr("src", response.avatar);
         }).catch(function(err) {
