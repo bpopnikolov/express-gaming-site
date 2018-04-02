@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
 
     User.hook('beforeValidate', async (user, option) => {
         user.username = user.email.substring(0, user.email.lastIndexOf('@'));
-
+        
         if (!user.avatar) {
             user.avatar = '/public/assets/img/no_user_avatar.png';
         }

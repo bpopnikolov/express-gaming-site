@@ -55,10 +55,10 @@ mixin nav()
             .collapsible-body
               ul
                 li
-                    a.waves-effect.waves-purple.center-align
+                    a.waves-effect.waves-purple.center-align(href="/genres")
                           | Genres
                 li
-                    a.waves-effect.waves-purple.center-align
+                    a.waves-effect.waves-purple.center-align(href="/platforms")
                           | Platforms
           .divider
         if user
@@ -77,11 +77,11 @@ mixin nav()
                     | Register
     ul#gamesDropdown.dropdown-content
         li
-            a.waves-effect.waves-purple(href="#")
+            a.waves-effect.waves-purple(href="/genres")
                 | Genres
         li.divider
         li
-            a.waves-effect.waves-purple(href="#")
+            a.waves-effect.waves-purple(href="/platforms")
                 | Platforms
     ul#profileDropdown.dropdown-content
         li

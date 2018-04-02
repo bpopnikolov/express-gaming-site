@@ -5,7 +5,6 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
-
 const init = (app) => {
     // view engine setup
     app.set('views', path.join(__dirname, '..', '..', 'views'));

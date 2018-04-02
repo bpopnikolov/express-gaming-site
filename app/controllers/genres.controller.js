@@ -1,81 +1,38 @@
-const dbWrapper = require('../database-wrapper');
+// const dbWrapper = require('../database-wrapper');
 
-const getAll = async (req, res, next) => {
-    return dbWrapper.genres.getAll();
-};
 
-const apiGetGamesByCategory = async (req, res, next) => {
-    const genreNameStr = req.params.genreName;
-    const genreObj = await dbWrapper.genres.hasRecord(genreNameStr);
-    if (!genreObj) {
-        res.render('app/pageNotFound');
+class GenresController {
+    constructor(dbWrapper) {
+        this.dbWrapper = dbWrapper;
     }
-    const context = {};
-    context.genre = genreNameStr;
 
-    const page = req.params.page || 0;
-    const gamesPerPage = req.params.gamesPerPage || 2;
-    const gamesFromDbStartingFrom = page * gamesPerPage;
+    async getGamesByGenre(genreNameStr) {
+        const genreObj = await this.dbWrapper.genres.hasRecord(genreNameStr);
 
-    const gamesObjsFromCateg = await dbWrapper.genres
-        .getGamesInRange(genreObj, gamesPerPage, gamesFromDbStartingFrom);
+        if (!genreObj) {
+            return genreObj;
+        }
 
-    const games = [];
-
-    gamesObjsFromCateg.forEach((gameObj, index) => {
-        const curGame = {};
-        curGame.name = gameObj.name;
-        curGame.summary = gameObj.summary;
-        curGame.rating = gameObj.rating;
-        curGame.ratingCount = gameObj.ratingCount;
-        curGame.releaseDate = gameObj.releaseDate;
-        curGame.coverUrl = gameObj.cover;
-
-        curGame.gameModes = gameObj.GameModes
-            .map((gameMode) => gameMode.name);
-
-        curGame.genres = gameObj.Genres
-            .map((genre) => genre.name);
-
-        curGame.platfroms = gameObj.Platforms
-            .map((platform) => platform.name);
-
-        curGame.publishers = gameObj.Publishers
-            .map((publisher) => publisher.name);
-
-        curGame.screenshots = gameObj.Screenshots
-            .map((screeshot) => screeshot.url);
-
-        curGame.videos = gameObj.Videos
-            .map((video) => video.url);
-
-        curGame.websites = gameObj.Websites
-            .map((website) => website.url);
-
-        games.push(curGame);
-    });
-
-    context.gamesObjs = games;
-    console.log(context);
-    res.send(context);
-};
-
-const getGamesByCategory = async (req, res, next) => {
-    const genreNameStr = req.params.genreName;
-    const genreObj = await dbWrapper.genres.hasRecord(genreNameStr);
-    if (!genreObj) {
-        console.log('vlezna');
-        res.render('app/pageNotFound');
-        return null;
+        return this.dbWrapper.genres.getGames(genreObj);
     }
-    console.log('izlezna');
-    const context = {};
-    context.genreName = genreNameStr;
-    res.render('genres/gamesFromGenre', context);
-};
 
-module.exports = {
-    getAll,
-    apiGetGamesByCategory,
-    getGamesByCategory,
-};
+    async getAllGenres() {
+        return await this.dbWrapper.genres.getAll();
+    }
+
+    async getGamesInRange(genreNameStr, limit, offset) {
+        const genreObj = await this.dbWrapper.genres.hasRecord(genreNameStr);
+
+        if (!genreObj) {
+            return null;
+        }
+
+        return await this.dbWrapper.genres
+            .getGamesInRange(genreObj, limit, offset);
+    }
+}
+
+// const getAllGenres = async (req, res, next) => {
+//     res.render('genres/allGenres');
+// };
+module.exports = GenresController;

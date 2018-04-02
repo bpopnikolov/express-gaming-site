@@ -40,5 +40,23 @@ class usersDbWrapper extends genericDbWrapper {
 
         return savedUser[0];
     }
+
+    async update(user, updateInfo) {
+        if (updateInfo.email && updateInfo.email !== user.email) {
+            user.email = updateInfo.email;
+        }
+
+        if (updateInfo.password) {
+            user.password = updateInfo.password;
+        }
+
+        if (updateInfo.avatar) {
+            user.avatar = updateInfo.avatar;
+        }
+
+        const savedUser = await user.save();
+
+        return savedUser;
+    }
 }
 module.exports = usersDbWrapper;

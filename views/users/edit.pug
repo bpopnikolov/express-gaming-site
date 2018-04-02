@@ -38,7 +38,7 @@ block content
                       | #{user.email}
 
             #editProfile.col.s12
-              form.col.s12.edit-profile-form
+              form.col.s12.edit-profile-form(action='/api/users/profile/edit', method='POST')
                   .row
                     .input-field.col.s8.offset-s2
                       input#first_name.validate(type='text', value=user.firstname, disabled='true')
@@ -49,17 +49,17 @@ block content
                       label(for='last_name') Last Name
                   .row
                     .input-field.col.s8.offset-s2
-                      input#email.validate(type='email', value=user.email)
+                      input#email.validate(type='email', value=user.email, name="email")
                       label(for='email') Email
                   .row
                     .input-field.col.s8.offset-s2
                       input#password.validate(type='password')
-                      label(for='password') Password
+                      label(for='password', name="password") Password
                   .row
                     .file-field.input-field.col.s8.offset-s2
                      button.btn
                        |File
-                       input#avatar(type='file')
+                       input#avatar(type='file',  name= "avatar")
                      .file-path-wrapper
                        input.file-path.validate(type='text', placeholder='Upload avatar')
                   .row
