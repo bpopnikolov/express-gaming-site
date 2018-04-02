@@ -1,0 +1,43 @@
+extends ../shared/master
+
+block append head
+    link(rel="stylesheet", type="text/css", href='/public/assets/styles/games/games-by-name.css')
+
+block append scripts
+    script(src="/public/assets/js/games/gamesByName/scripts.js")
+
+block content
+    .container.center-align
+        .row
+            .center-align
+                h5
+                    | Your search:
+                h5.category-text
+                    | #{gameName}
+        
+        
+        
+        ul.pagination
+            - for (var i=1; i<=pagesCount; i++)
+                li.waves-effect
+                    a(href='http://localhost:3001/games/gamesByName/'+gameName+'/'+i+' ')= i
+
+            
+
+
+            //- .card
+            //-     .card-image
+            //-         img(src='https://upload.wikimedia.org/wikipedia/commons/f/f8/Jonathan_Carroll_as_Superman.jpg')
+            //-         span.card-title Game Title
+            //-         span Rating: 8/10
+            //-     .card-content
+            //-         p
+            //-             | I am a very simple card. I am good at containing small bits of information.
+            //-             | I am convenient because I require little markup to use effectively.
+            //-     .card-action
+            //-         a(href='#') This is a link
+
+
+
+
+

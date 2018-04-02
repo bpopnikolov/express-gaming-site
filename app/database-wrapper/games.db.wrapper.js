@@ -11,8 +11,8 @@ const {
 
 class gamesDbWrapper extends genericDbWrapper {
     constructor() {
-        super(Game, [Genre, Platform, Publisher, Screenshot,
-                    Video]);
+        super(Game, [Genre, Platform, Publisher, Screenshot, Video,
+        ]);
     }
 
     async setGameModes(gameObj, gameModes) {
@@ -50,6 +50,20 @@ class gamesDbWrapper extends genericDbWrapper {
                 name: nameInput,
             },
             include: this.includes,
+        });
+    }
+
+    async getAllThatIncludes(strToInclude, limit, offset) {
+        return this.Model.findAll({
+            limit: limit,
+            offset: offset,
+            where: {
+                name: {
+                $like: `%${strToInclude}%`,
+                },
+            },
+            include: this.includes,
+
         });
     }
 

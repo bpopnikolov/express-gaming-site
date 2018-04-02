@@ -15,13 +15,13 @@ block content
                 h2.center-align
                     | Find your favorite game
         div.row
-            form.col.s6.offset-s3(method="get")
+            form.col.s6.offset-s3
                 div.row
                     div.input-field.gs-field
-                        input#icon_prefix.validate(type='text')
+                        input#icon_prefix.validate.input-value(type='text')
                         label(for='icon_prefix')
                             | Search Here
-                    button.btn-floating.gs-button(type="submit" value="Submit")
+                    button.btn-floating.gs-button#search-button(type='button')
                         i.material-icons.gs-button-icon search
     div.wr-slider
         div.slider-games
