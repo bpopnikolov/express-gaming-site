@@ -5,10 +5,63 @@ const {
 const GamesController = require('../../controllers/games.controller');
 const errorsConfig = require('../../config/errors.config');
 
-
 const init = (app, dbWrapper) => {
     const router = new Router();
     const controller = new GamesController(dbWrapper);
+
+    const gamesByNameApiMiddleware = async (req, res, next) => {
+        const gameNameStr = req.params.gameName;
+        const page = (req.params.page || 1) - 1;
+        const gamesPerPage = 10;
+        const gamesFromDbStartingFrom = page * gamesPerPage;
+
+        const gamesObjs = await controller.getGamesThatIncludesStr(gameNameStr, gamesPerPage, gamesFromDbStartingFrom);
+
+        if (!gamesObjs) {
+            return next();
+        }
+
+        const context = {};
+        context.gameName = gameNameStr;
+
+        const games = [];
+
+        gamesObjs.forEach((gameObj, index) => {
+            const curGame = {};
+            curGame.name = gameObj.name;
+            curGame.summary = gameObj.summary;
+            curGame.rating = gameObj.rating;
+            curGame.ratingCount = gameObj.ratingCount;
+            curGame.releaseDate = gameObj.releaseDate;
+            curGame.coverUrl = gameObj.cover;
+
+            // curGame.gameModes = gameObj.GameModes
+            //     .map((gameMode) => gameMode.name);
+
+            curGame.genres = gameObj.Genres
+                .map((genre) => genre.name);
+
+            curGame.platfroms = gameObj.Platforms
+                .map((platform) => platform.name);
+
+            curGame.publishers = gameObj.Publishers
+                .map((publisher) => publisher.name);
+
+            curGame.screenshots = gameObj.Screenshots
+                .map((screeshot) => screeshot.url);
+
+            curGame.videos = gameObj.Videos
+                .map((video) => video.url);
+
+            // curGame.websites = gameObj.Websites
+            //     .map((website) => website.url);
+
+            games.push(curGame);
+        });
+
+        context.gamesObjs = games;
+        return res.send(context);
+    };
 
     router
         .get('/:gameName/getUserRating', async (req, res, next) => {
@@ -50,7 +103,9 @@ const init = (app, dbWrapper) => {
             const savedRating = await controller.setGameRating(user, gameObj, rating);
 
             return res.status(200).json(savedRating);
-        });
+        })
+        .get('/gamesByName/:gameName', gamesByNameApiMiddleware)
+        .get('/gamesByName/:gameName/:page', gamesByNameApiMiddleware);
 
     app.use('/api/games', router);
 };
