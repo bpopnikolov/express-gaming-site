@@ -53,7 +53,7 @@ block content
                       label(for='email') Email
                   .row
                     .input-field.col.s8.offset-s2
-                      input#password.validate(type='password')
+                      input#password.validate(type='password', name="password", pattern=".{5,}")
                       label(for='password', name="password") Password
                   .row
                     .file-field.input-field.col.s8.offset-s2

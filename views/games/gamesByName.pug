@@ -1,26 +1,26 @@
 extends ../shared/master
 
 block append head
-    link(rel="stylesheet", type="text/css", href='/public/assets/styles/genres/games-from-genre.css')
+    link(rel="stylesheet", type="text/css", href='/public/assets/styles/games/games-by-name.css')
 
 block append scripts
-    script(src="/public/assets/js/genres/gamesFromGenre/scripts.js")
+    script(src="/public/assets/js/games/gamesByName/scripts.js")
 
 block content
     .container.center-align
         .row
             .center-align
                 h5
-                    | Genre:
+                    | Your search:
                 h5.category-text
-                    | #{genreName}
+                    | #{gameName}
         
         
         
         ul.pagination
             - for (var i=1; i<=pagesCount; i++)
                 li.waves-effect
-                    a(href='/genres/'+genreName+'/'+i+' ')= i
+                    a(href='/games/gamesByName/'+gameName+'/'+i+' ')= i
 
             
 

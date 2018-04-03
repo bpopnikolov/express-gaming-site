@@ -74,7 +74,7 @@ const init = (app, dbWrapper) => {
         .get('/:genreName', apiMiddleware)
         .get('/:genreName/:page', apiMiddleware);
 
-    app.use('/api/genres/', router);
+    app.use('/api/genres', router);
 };
 
 module.exports = {

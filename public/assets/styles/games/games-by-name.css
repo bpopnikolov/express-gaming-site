@@ -1,0 +1,30 @@
+.category-text{
+    color:#26a69a;
+    font-weight: bold;
+}
+
+.game-wrapper{
+    display: inline-block;
+    max-width: 240px;
+    color: #7e57c2;;
+    background-color: #f7f7f7;
+    overflow: hidden;
+    margin: 10px;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.game-pic{
+    width: 220px;
+    height: 300px;
+}
+
+.game-name{
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.game-label-value{
+    color:#26a69a;
+    font-weight: bold;
+}

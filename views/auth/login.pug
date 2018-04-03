@@ -1,21 +1,29 @@
 extends ../shared/master
 
+block append scripts
+    script(src="/public/assets/js/core/auth/login.js")
+
 block content
-    div.row
-        form.col.s12(action="/auth/login", method="post")
-            div.row
-                h2
-                    span.col.s12
-                    | Log in
-            div.row
-                div.input-field.col.s6
-                    input.validate(type="email", name="email", placeholder="Email")
-                    label(for="email")
-                        | Email Address
-                div.input-field.col.s6
-                    input.validate(type="password", name="password", placeholder="Password")
-                    label(for="password")
-                        | Password
-            div.row
-                button.btn(type="submit", value="Log in")
-                    | Log in
+    .container
+     .row
+        .col.s12.m10.offset-m1.xl6.offset-xl3
+            .card-panel
+                .row
+                    .col.s8.offset-s2
+                        h4 Log in
+                .row
+                    form.col.s12#loginForm(action="/auth/login", method="post")
+                        div.row
+                            div.input-field.col.s8.offset-s2
+                                input.validate#email(type="email", name="email", required="true", placeholder="Email")
+                                label#emailLbl(for="email")
+                                    | Email
+                        div.row
+                            div.input-field.col.s8.offset-s2
+                                input.validate#password(type="password", name="password", pattern=".{5,}" required="true",          placeholder="Password")
+                                label(for="password")
+                                    | Password
+                        div.row
+                            .col.s4.offset-s4
+                            button.btn(type="submit", value="Log in")
+                                | Log in

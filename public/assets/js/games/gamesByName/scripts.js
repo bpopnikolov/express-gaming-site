@@ -6,8 +6,8 @@ $(function () {
       });
 
     var curPage = 1;
-    if (paramsFromPath.length >= 3) {
-      curPage = paramsFromPath[2];
+    if (paramsFromPath.length >= 4) {
+      curPage = paramsFromPath[3];
     }
 
     if (curPage >= 1 && curPage <= Number($('ul.pagination li.waves-effect').last().text())) {

@@ -68,11 +68,14 @@ class GamesController {
             avgRating,
             userCount,
         };
-
         return {
             contextOfUserRatingReq,
             contextOfAvgRating,
         };
+    }
+
+    async getGamesThatIncludesStr(strToInclude, limit, offset) {
+        return this.dbWrapper.games.getAllThatIncludes(strToInclude, limit, offset);
     }
 }
 

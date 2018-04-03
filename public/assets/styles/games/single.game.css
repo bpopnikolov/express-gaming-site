@@ -1,6 +1,4 @@
-.parallax-container {
-
-}
+.parallax-container {}
 
 .parallax-container .section {
     width: 100%;
@@ -56,4 +54,8 @@
 .inline-icon {
     vertical-align: bottom;
     font-size: 18px !important;
+}
+
+.reviewContainer h2 {
+    font-size: 1.5em ;
 }

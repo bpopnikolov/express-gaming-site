@@ -11,6 +11,15 @@ class ratingsDbWrapper extends genericDbWrapper {
         super(UserGameRating, [Game, User]);
     }
 
+    findOne(user, game) {
+        return this.Model.findOne({
+            where: {
+                UserId: user.id,
+                GameId: game.id,
+            },
+        });
+    }
+
     getGameRatingByUserIdAndGameId(obj) {
         return this.Model.findOne({
             where: {
