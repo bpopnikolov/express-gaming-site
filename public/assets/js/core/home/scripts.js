@@ -4,10 +4,4 @@ $(document).ready(function () {
         var searchValue = $(".input-value").val();
         window.location.href = "/games/gamesByName/" + searchValue;
     });
-
-    $(".slider-games").slick({
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 3
-    });
 });

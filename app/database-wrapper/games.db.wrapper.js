@@ -15,6 +15,18 @@ class gamesDbWrapper extends genericDbWrapper {
         ]);
     }
 
+    async updateRating(gameObj, rating) {
+        console.log(gameObj.rating);
+        console.log(rating);
+        gameObj.rating = Math.round(rating);
+        return gameObj.save();
+    }
+
+    async updateRatingCount(gameObj, ratingCount) {
+        gameObj.ratingCount = ratingCount;
+        return gameObj.save();
+    }
+
     async setGameModes(gameObj, gameModes) {
         return gameObj.setGameModes(gameModes);
     }
@@ -49,6 +61,16 @@ class gamesDbWrapper extends genericDbWrapper {
             where: {
                 name: nameInput,
             },
+            include: this.includes,
+        });
+    }
+
+    async getTopThreeGames() {
+        return this.Model.findAll({
+            limit: 3,
+            order: [
+                ['rating', 'DESC'],
+            ],
             include: this.includes,
         });
     }

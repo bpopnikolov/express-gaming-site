@@ -1,11 +1,8 @@
 extends ../shared/master
 block append head
-    link(rel="stylesheet", type="text/css", href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css")
-    link(rel="stylesheet", type="text/css", href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css")
     link(rel="stylesheet", type="text/css", href='/public/assets/styles/core/home.css')
 
 block append scripts
-    script(src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js")
     script(src="/public/assets/js/core/home/scripts.js")
 
 block content
@@ -23,24 +20,27 @@ block content
                             | Search Here
                     button.btn-floating.gs-button#search-button(type='button')
                         i.material-icons.gs-button-icon search
-    div.wr-slider
-        div.slider-games
-            div.game-box
-                img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
-                div.game-title
-                    | League of Legends
-            div.game-box
-                img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
-                div.game-title
-                    | League of Legends
-            div.game-box
-                img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
-                div.game-title
-                    | League of Legends
-            div.game-box
-                img(src="http://1.bp.blogspot.com/_FA30KVcjKm0/TLOUfC2OklI/AAAAAAAAAAo/WOT1m0SB5jU/s1600/GarenaLeagueoflegendsposter.jpg").game-pic
-                div.game-title
-                    | League of Legends
+    h4.center-align.top-games-label Top 3 rated games:
+    .row.center-align.game-container
+        each game, index in topThreeGames
+            a.game-wrapper(href='/games/'+game.name)
+                img.game-pic(src=game.cover)
+                .game-name
+                    | Title: 
+                    span.game-label-value
+                        | #{game.name}
+                        span
+                .game-rating
+                    | Rating: 
+                    span.game-label-value #{game.rating}
+                .game-genres
+                    | Genres: 
+                    span.game-label-value
+                        | #{game.genres.join(',')}
+                    //- each genre, index1 in game.genres
+                    //-     | #{genre.name}
+
+
 
 
  

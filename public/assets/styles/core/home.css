@@ -18,30 +18,32 @@
     vertical-align: middle;
 }
 
-.wr-slider {
-    max-width: 600px;
-    margin: 0 auto;
+.top-games-label{
+    color:#7e57c2;
 }
 
-.slick-prev:before {
-    color: #919191;
-}
-
-.slick-next:before {
-    color: #919191;
-}
-
-.slider-games {
-    background-color: #fff;
-    margin: 0 auto;
-}
-
-.game-box {
-    text-align: center;
+.game-wrapper{
+    display: inline-block;
+    max-width: 240px;
+    color: #7e57c2;;
+    background-color: #f7f7f7;
+    overflow: hidden;
+    margin: 10px;
+    padding: 10px;
+    vertical-align: top;
 }
 
 .game-pic{
-    width: 180px;
-    height: 250px;
-    margin: 0 auto;
+    width: 220px;
+    height: 300px;
+}
+
+.game-name{
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.game-label-value{
+    color:#26a69a;
+    font-weight: bold;
 }
