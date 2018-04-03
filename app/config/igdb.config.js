@@ -1,5 +1,5 @@
 const config = {
-    apiKey: '56e6ee522e3e1964b231487abe376786',
+    apiKey: '823bc080d7c1ca694f9ae2bd575ce9e6',
 };
 
 module.exports = config;
