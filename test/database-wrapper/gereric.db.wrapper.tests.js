@@ -6,30 +6,32 @@ const GenericDbWrapper =
     require('../../app/database-wrapper/generic.db.wrapper');
 
 describe('Generic Db wrapper', () => {
-    describe('When valid', () => {
-        it('with empty Model, expect GetAll() to return empty array', async () => {
-            const Model = {
-                findAll: () => [],
-                getById: (id) => {},
-            };
+    describe('findAll', () => {
+        describe('When valid', () => {
+            it('with empty Model, expect GetAll() to return empty array', async () => {
+                const Model = {
+                    findAll: () => [],
+                    getById: (id) => {},
+                };
 
-            const data = new GenericDbWrapper(Model);
+                const data = new GenericDbWrapper(Model);
 
-            const objects = await data.getAll();
+                const objects = await data.getAll();
 
-            expect(objects).to.be.empty;
-        });
-        it('with objects in Model, expect GetAll() to return all objects', async () => {
-            const objects = [1, 2, 3];
-            const Model = {
-                findAll: () => objects,
-            };
+                expect(objects).to.be.empty;
+            });
+            it('with objects in Model, expect GetAll() to return all objects', async () => {
+                const objects = [1, 2, 3];
+                const Model = {
+                    findAll: () => objects,
+                };
 
-            const data = new GenericDbWrapper(Model);
+                const data = new GenericDbWrapper(Model);
 
-            const result = await data.getAll();
+                const result = await data.getAll();
 
-            expect(result).deep.equal(objects);
+                expect(result).deep.equal(objects);
+            });
         });
     });
 
