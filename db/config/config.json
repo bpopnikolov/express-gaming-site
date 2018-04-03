@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "yksifrcspoukzebd",
-    "password": "XYBVmpkWWVxbdT5Z6zzZQyDMZMQhYdYhnD7ESZQRn5FzrcPZM5ACRkzxuX4FFc7T",
-    "database": "db6c59482e5fcf4c8ab442a8b600d77264",
-    "host": "6c59482e-5fcf-4c8a-b442-a8b600d77264.mysql.sequelizer.com",
+    "username": "root",
+    "password": "root",
+    "database": "gaming_site_db",
+    "host": "localhost",
     "dialect": "mysql"
   },
   "test": {

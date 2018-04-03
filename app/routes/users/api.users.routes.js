@@ -67,6 +67,7 @@ const init = (app, dbWrapper) => {
             // console.log(savedUser);
             res.status(200).json({
                 avatar: savedUser.avatar,
+                email: savedUser.email,
             });
         });
         return null;

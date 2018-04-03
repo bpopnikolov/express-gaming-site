@@ -53,8 +53,8 @@ $(function() {
             }
         },
         submitHandler: function(v) {
-            var formData = new FormData(v.currentForm);
-
+            var formData = new FormData(v);
+            console.log(v);
             httpClient.ajax({
                 url: "/api/users/profile/edit",
                 type: "POST",
@@ -71,6 +71,7 @@ $(function() {
                 });
                 $(".avatar img").attr("src", response.avatar);
                 $(".profile-image").attr("src", response.avatar);
+                $("#email").val(response.email);
             }).catch(function(err) {
                 console.log(err);
                 M.toast({
