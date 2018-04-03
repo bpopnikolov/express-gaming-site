@@ -24,7 +24,8 @@ const init = (app, dbWrapper) => {
                 return res.status(404).json(errorsConfig.gameNotFoundError);
             }
 
-            const userRating = await controller.getGameUserRating(user, gameObj);
+            const userRating =
+                await controller.getGameUserRating(user, gameObj);
 
             if (!userRating) {
                 return res.status(404).json(errorsConfig.noUserRatingerror);
@@ -47,7 +48,8 @@ const init = (app, dbWrapper) => {
             const gameObj = await controller.getByName(gameName);
             const user = req.user;
 
-            const savedRating = await controller.setGameRating(user, gameObj, rating);
+            const savedRating =
+                await controller.setGameRating(user, gameObj, rating);
 
             return res.status(200).json(savedRating);
         });
