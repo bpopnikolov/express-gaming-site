@@ -24,6 +24,7 @@ class GamesController {
         gameObj.avgRating = avgRating;
         gameObj.userCount = userCount;
 
+
         return gameObj;
     }
 
@@ -56,7 +57,7 @@ class GamesController {
 
         const ratingObjOfGame =
             await this.dbWrapper.ratings.getAllGameRatings(gameObj.id);
-
+        
         const userCount = ratingObjOfGame.count;
 
         const sumOfRatings =
@@ -68,10 +69,17 @@ class GamesController {
             avgRating,
             userCount,
         };
+
+        await this.dbWrapper.games.updateRating(gameObj, avgRating);
+        await this.dbWrapper.games.updateRatingCount(gameObj, userCount);
         return {
             contextOfUserRatingReq,
             contextOfAvgRating,
         };
+    }
+
+    async getTopThreeGames() {
+        return this.dbWrapper.games.getTopThreeGames();
     }
 
     async getGamesThatIncludesStr(strToInclude, limit, offset) {
