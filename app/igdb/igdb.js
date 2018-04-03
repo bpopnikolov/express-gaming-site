@@ -131,7 +131,7 @@ const addGamesToDatabase = async (games) => {
 };
 
 const run = async () => {
-    const games = await getAllGames(1);
+    const games = await getAllGames(50);
     await addGamesToDatabase(games);
     console.log('Games were added to database.');
 };
